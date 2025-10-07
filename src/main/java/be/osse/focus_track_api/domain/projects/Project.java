@@ -1,6 +1,6 @@
-package be.osse.activ_planner_api.domain.projects;
+package be.osse.focus_track_api.domain.projects;
 
-import be.osse.activ_planner_api.domain.logging.Log;
+import be.osse.focus_track_api.domain.logging.Log;
 import jakarta.persistence.*;
 
 import java.util.List;

@@ -1,7 +1,7 @@
-package be.osse.activ_planner_api.service.general;
+package be.osse.focus_track_api.service.general;
 
-import be.osse.activ_planner_api.domain.general.AppUser;
-import be.osse.activ_planner_api.repository.general.AppUserRepo;
+import be.osse.focus_track_api.domain.general.AppUser;
+import be.osse.focus_track_api.repository.general.AppUserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

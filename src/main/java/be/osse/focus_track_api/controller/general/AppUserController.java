@@ -1,7 +1,7 @@
-package be.osse.activ_planner_api.controller.general;
+package be.osse.focus_track_api.controller.general;
 
-import be.osse.activ_planner_api.domain.general.AppUser;
-import be.osse.activ_planner_api.service.general.AppUserService;
+import be.osse.focus_track_api.domain.general.AppUser;
+import be.osse.focus_track_api.service.general.AppUserService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;

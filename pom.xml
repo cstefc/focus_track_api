@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>be.osse</groupId>
-	<artifactId>activ_planner_api</artifactId>
+	<artifactId>focus_track_api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>activ_planner_api</name>
+	<name>focus_track_api</name>
 	<description>The API for my activity planner / tracker application</description>
 	<url/>
 	<licenses>

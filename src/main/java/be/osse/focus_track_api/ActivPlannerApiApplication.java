@@ -1,4 +1,4 @@
-package be.osse.activ_planner_api;
+package be.osse.focus_track_api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

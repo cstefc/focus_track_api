@@ -1,6 +1,6 @@
-package be.osse.activ_planner_api.domain.projects;
+package be.osse.focus_track_api.domain.projects;
 
-import be.osse.activ_planner_api.domain.projects.predefined.Status;
+import be.osse.focus_track_api.domain.projects.predefined.Status;
 import jakarta.persistence.*;
 
 @Entity

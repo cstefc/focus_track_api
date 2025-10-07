@@ -1,4 +1,4 @@
-package be.osse.activ_planner_api.domain.general;
+package be.osse.focus_track_api.domain.general;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.NaturalId;

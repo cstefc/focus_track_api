@@ -1,4 +1,4 @@
-package be.osse.activ_planner_api.domain.logging;
+package be.osse.focus_track_api.domain.logging;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
