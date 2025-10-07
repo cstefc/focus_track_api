@@ -7,11 +7,11 @@ import java.util.Objects;
 import java.util.UUID;
 
 @Entity
-public class User {
+public class AppUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
 
     @NaturalId
     @Column(unique = true,  nullable = false, updatable = false)
@@ -21,14 +21,14 @@ public class User {
 
     private String email;
 
-    public User() {
+    public AppUser() {
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -59,8 +59,8 @@ public class User {
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(uuid, user.uuid) && Objects.equals(name, user.name) && Objects.equals(email, user.email);
+        AppUser appUser = (AppUser) o;
+        return Objects.equals(id, appUser.id) && Objects.equals(uuid, appUser.uuid) && Objects.equals(name, appUser.name) && Objects.equals(email, appUser.email);
     }
 
     @Override
