@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ActivPlannerApiApplication {
+public class FocusTrackApiApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ActivPlannerApiApplication.class, args);
+		SpringApplication.run(FocusTrackApiApplication.class, args);
 	}
 
 }

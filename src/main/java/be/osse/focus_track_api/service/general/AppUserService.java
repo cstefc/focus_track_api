@@ -21,5 +21,4 @@ public class AppUserService {
         return (List<AppUser>) appUserRepo.findAll();
     }
 
-
 }
