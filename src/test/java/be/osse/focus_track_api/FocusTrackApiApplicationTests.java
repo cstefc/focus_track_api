@@ -1,4 +1,4 @@
-package be.osse.activ_planner_api;
+package be.osse.focus_track_api;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
