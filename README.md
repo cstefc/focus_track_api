@@ -2,6 +2,7 @@
 
 # Focus Track API
 
+![status](https://img.shields.io/badge/status-WIP-yellow)
 ![Java](https://img.shields.io/badge/Java-21-blue) 
 ![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.5.6-brightgreen)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-17-blue)
