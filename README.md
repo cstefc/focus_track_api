@@ -2,13 +2,11 @@
 
 # Focus Track API
 
+![status](https://img.shields.io/badge/status-WIP-yellow)
 ![Java](https://img.shields.io/badge/Java-21-blue) 
 ![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.5.6-brightgreen)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-17-blue)
 ![OpenAPI](https://img.shields.io/badge/OpenAPI-3.0-orange)
-![GitHub Repo Size](https://img.shields.io/github/repo-size/cstefc/focus_track_api)
-![GitHub Stars](https://img.shields.io/github/stars/cstefc/focus_track_api?style=social)
-
 
 **Focus Track API** is a work-in-progress project designed as a portfolio piece to showcase my backend development skills. It allows me to deepen my knowledge of **Spring Boot** while building a practical application to help track personal goals.  
 
