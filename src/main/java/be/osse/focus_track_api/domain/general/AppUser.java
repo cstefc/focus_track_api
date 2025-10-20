@@ -1,8 +1,10 @@
 package be.osse.focus_track_api.domain.general;
 
+import be.osse.focus_track_api.domain.projects.Project;
 import jakarta.persistence.*;
 import org.hibernate.annotations.NaturalId;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -20,6 +22,9 @@ public class AppUser {
     private String name;
 
     private String email;
+
+    @OneToMany(cascade = CascadeType.ALL,  fetch = FetchType.EAGER, mappedBy = "owner")
+    private List<Project>  projects;
 
     public AppUser() {
     }
@@ -56,15 +61,23 @@ public class AppUser {
         this.email = email;
     }
 
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         AppUser appUser = (AppUser) o;
-        return Objects.equals(id, appUser.id) && Objects.equals(uuid, appUser.uuid) && Objects.equals(name, appUser.name) && Objects.equals(email, appUser.email);
+        return Objects.equals(id, appUser.id) && Objects.equals(uuid, appUser.uuid) && Objects.equals(name, appUser.name) && Objects.equals(email, appUser.email) && Objects.equals(projects, appUser.projects);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, uuid, name, email);
+        return Objects.hash(id, uuid, name, email, projects);
     }
 }

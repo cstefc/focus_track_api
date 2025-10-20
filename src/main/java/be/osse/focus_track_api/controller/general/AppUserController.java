@@ -16,7 +16,7 @@ public class AppUserController {
         this.appUserService = appUserService;
     }
 
-    @GetMapping("/users")
+    @GetMapping("/user")
     @ResponseBody
     public List<AppUser> getAppUsers(){
         return appUserService.findAll();
