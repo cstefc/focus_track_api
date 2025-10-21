@@ -71,7 +71,7 @@ Put the private key in `src/main/resources/private-key.json`
 mvnw.cmd spring-boot:run
 ```
 
-### Step 4: Check if the API is working
+### Step 4: Check if the API is working
 
 Once the server is running, go to `http://localhost:8080/public/docs` to see the documentation
 Please note that you can only access the endpoints when you have following header in the request:
