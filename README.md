@@ -16,20 +16,21 @@ This API is part of a full-stack project. The corresponding front-end can be fou
 - **Backend**: Spring Boot  
 - **Database**: PostgreSQL 17
 - **Language**: Java 21  
-- **Authentication**: Planned (OAuth/JWT)  
+- **Authentication**: OAuth2/JWT using Firebase
 - **Front-end**: React [(link to repo)](https://github.com/cstefc/focus_track_ui)
+
 ## Features (Work in Progress)
 
 - **Environment Variables**: Sensitive information such as database credentials is stored in `.env` files.  
-- **User Endpoint**: `/users` – Returns JSON data of all users.  
+- **OAuth2 Authentication** – Secure communication between front-end and back-end.  
+- **Endpoints**:
+     - `/project`: get
 - **Mock Data**: Pre-generated data available for front-end development and testing purposes.  
 
 > ⚠️ Note: Additional endpoints for todos, goal tracking, and sports sessions are planned as the API continues development.
 ## Roadmap
 
 The project follows a **feature-driven development approach**, starting from the front-end and then integrating with the back-end. Planned features include:
-
-- **OAuth Authentication** – Secure communication between front-end and back-end.  
 - **Project Management** – Ability to create and manage projects.  
 - **Plans & Steps** – Add detailed plans with steps inside projects.  
 - **Logging Feature** – Track progress and updates within projects.  
@@ -39,7 +40,8 @@ The project follows a **feature-driven development approach**, starting from the
 ## Usage / Examples
 
 ### Prerequisites
-- **PostgreSQL** database + user for the API  
+- **PostgreSQL** database + user for the API
+- **Firebase Project**
 - **Java 21** installed  
 
 ### Step 1: Create '.env' file
@@ -53,7 +55,11 @@ DB_PORT=5432
 DB_NAME=focus_track
 ```
 
-### Step 2: Run the application
+### Step 2: Download private key from Firebase console
+See [this tutorial](https://clemfournier.medium.com/how-to-get-my-firebase-service-account-key-file-f0ec97a21620)
+Put the private key in `src/main/resources/private-key.json`
+
+### Step 3: Run the application
 
 #### Linux / macOS
 ```
@@ -65,10 +71,10 @@ DB_NAME=focus_track
 mvnw.cmd spring-boot:run
 ```
 
-Once the server is running, visit:
+### Step 4: Check if the API is working
 
+Once the server is running, go to `http://localhost:8080/public/docs` to see the documentation
+Please note that you can only access the endpoints when you have following header in the request:
 ```
-http://localhost:8080/users
+Authorization: Bearer *JWT token from Firebase login*
 ```
-
-to see the current JSON response of all users.
