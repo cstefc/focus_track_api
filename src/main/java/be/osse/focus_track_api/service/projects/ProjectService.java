@@ -18,9 +18,6 @@ public class ProjectService {
     }
 
     public List<Project> findAll() {
-        for (Project project : projectRepo.findAll()) {
-            System.out.println(project.getName());
-        }
         return (List<Project>) projectRepo.findAll();
     }
 

@@ -66,10 +66,9 @@ public class Project {
         this.log = log;
     }
 
-    public Long getOwnerId() {
-        return owner.getId();
+    public String getOwnerUuid() {
+        return owner.getUuid();
     }
-
 
     @Override
     public boolean equals(Object o) {

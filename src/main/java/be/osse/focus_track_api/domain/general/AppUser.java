@@ -1,48 +1,42 @@
 package be.osse.focus_track_api.domain.general;
 
+import be.osse.focus_track_api.domain.authorization.GrantedAuthorityFactory;
+import be.osse.focus_track_api.domain.authorization.Role;
 import be.osse.focus_track_api.domain.projects.Project;
 import jakarta.persistence.*;
-import org.hibernate.annotations.NaturalId;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.UUID;
 
 @Entity
-public class AppUser {
+public class AppUser implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @NaturalId
     @Column(unique = true,  nullable = false, updatable = false)
-    private String uuid = UUID.randomUUID().toString();
+    private String uuid;
 
     private String name;
 
     private String email;
 
+    private List<Role> roles;
+
     @OneToMany(cascade = CascadeType.ALL,  fetch = FetchType.EAGER, mappedBy = "owner")
     private List<Project>  projects;
 
-    public AppUser() {
-    }
+    public AppUser() {}
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public AppUser(String uuid, String name, String email, List<Role> roles) {
+        this.uuid = uuid;
+        this.name = name;
+        this.email = email;
+        this.roles = roles;
     }
 
     public String getUuid() {
         return uuid;
-    }
-
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
     }
 
     public String getName() {
@@ -69,15 +63,38 @@ public class AppUser {
         this.projects = projects;
     }
 
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
+    @Override
+    public List<GrantedAuthority> getAuthorities() {
+        return roles.stream().map(GrantedAuthorityFactory::createGrantedAuthority).toList();
+    }
+
+    @Override
+    public String getPassword() {
+        return null;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.uuid;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         AppUser appUser = (AppUser) o;
-        return Objects.equals(id, appUser.id) && Objects.equals(uuid, appUser.uuid) && Objects.equals(name, appUser.name) && Objects.equals(email, appUser.email) && Objects.equals(projects, appUser.projects);
+        return Objects.equals(uuid, appUser.uuid) && Objects.equals(name, appUser.name) && Objects.equals(email, appUser.email) && Objects.equals(roles, appUser.roles) && Objects.equals(projects, appUser.projects);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, uuid, name, email, projects);
+        return Objects.hash(uuid, name, email, roles, projects);
     }
 }

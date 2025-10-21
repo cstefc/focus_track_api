@@ -21,4 +21,12 @@ public class AppUserService {
         return (List<AppUser>) appUserRepo.findAll();
     }
 
+    public AppUser findByUuid(String uuid) {
+        return appUserRepo.findByUuid(uuid);
+    }
+
+    public AppUser save(final AppUser appUser) {
+        return appUserRepo.save(appUser);
+    }
+
 }
