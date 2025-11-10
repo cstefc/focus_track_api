@@ -18,7 +18,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-import java.util.Collections;
 import java.util.List;
 
 @Component
@@ -41,23 +40,20 @@ public class FirebaseTokenFilter extends OncePerRequestFilter {
         String header = request.getHeader("Authorization");
 
         if (developmentMode) {
-            AppUser appUser = new AppUser(
-                    "dev-001",
-                    "Alice Developer",
-                    "alice.developer@focustrack.com",
-                    List.of(Role.ADMIN, Role.USER)
-            );
+            AppUser appUser = appUserService.findByUuid("dev-001");
+
+            if (appUser == null) {
+                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                return;
+            }
 
             // Set authenticated principal (we only need UID)
             UsernamePasswordAuthenticationToken authentication =
-                    new UsernamePasswordAuthenticationToken(appUser, null, Collections.emptyList());
+                    new UsernamePasswordAuthenticationToken(appUser, null, appUser.getAuthorities());
 
             SecurityContextHolder.getContext().setAuthentication(authentication);
-            System.out.println("Development Mode Used: "+request.getMethod());
-            return;
         }
-
-        if (header != null && header.startsWith("Bearer ")) {
+        else if (header != null && header.startsWith("Bearer ")) {
             String idToken = header.substring(7);
             try {
                 // Verify ID token (checks signature & expiration)
@@ -71,7 +67,7 @@ public class FirebaseTokenFilter extends OncePerRequestFilter {
 
                 // Set authenticated principal (we only need UID)
                 UsernamePasswordAuthenticationToken authentication =
-                        new UsernamePasswordAuthenticationToken(appUser, null, Collections.emptyList());
+                        new UsernamePasswordAuthenticationToken(appUser, null, appUser.getAuthorities());
 
                 SecurityContextHolder.getContext().setAuthentication(authentication);
 
