@@ -17,10 +17,10 @@ public class AppUser implements UserDetails {
     @Column(unique = true,  nullable = false, updatable = false)
     private String uuid;
 
-    @OneToMany(cascade = CascadeType.ALL,  fetch = FetchType.EAGER, mappedBy = "appUser")
+    @OneToMany(cascade = CascadeType.ALL,  fetch = FetchType.LAZY, mappedBy = "appUser")
     private List<Project>  projects;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "appUser")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "appUser")
     private List<Event> events;
 
     private String name;

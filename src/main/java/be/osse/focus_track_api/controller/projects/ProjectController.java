@@ -2,7 +2,7 @@ package be.osse.focus_track_api.controller.projects;
 
 import be.osse.focus_track_api.domain.general.AppUser;
 import be.osse.focus_track_api.domain.projects.Project;
-import be.osse.focus_track_api.dto.project.CreateProjectDTO;
+import be.osse.focus_track_api.dto.projects.CreateProjectDTO;
 import be.osse.focus_track_api.repository.projects.ProjectRepo;
 import be.osse.focus_track_api.service.projects.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
