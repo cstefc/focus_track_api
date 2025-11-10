@@ -26,14 +26,14 @@ public class ProjectController {
     }
 
     @GetMapping("/projects")
-    public List<Project> getProjects(@AuthenticationPrincipal AppUser user) {
-        System.out.println(user.getUsername() + " " + user.getEmail());
+    public List<Project> getProjects(@AuthenticationPrincipal AppUser appUser) {
+        System.out.println(appUser.getUsername() + " " + appUser.getEmail());
         return projectService.findAll();
     }
 
     @PostMapping("/projects")
-    public Project createProject(@AuthenticationPrincipal AppUser user, @RequestBody CreateProjectDTO projectData) {
-        final Project project = new Project(user, projectData);
+    public Project createProject(@AuthenticationPrincipal AppUser appUser, @RequestBody CreateProjectDTO projectData) {
+        final Project project = new Project(appUser, projectData);
         return projectRepo.save(project);
     }
 

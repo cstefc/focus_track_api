@@ -1,7 +1,7 @@
 package be.osse.focus_track_api.security;
 
-import be.osse.focus_track_api.domain.authorization.Role;
 import be.osse.focus_track_api.domain.general.AppUser;
+import be.osse.focus_track_api.domain.predefined.Role;
 import be.osse.focus_track_api.service.general.AppUserService;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseToken;

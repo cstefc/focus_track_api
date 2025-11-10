@@ -16,34 +16,55 @@ public class Project {
     private Long id;
 
     @ManyToOne
-    private AppUser owner;
-
-    private String name;
-
-    private String description;
+    private AppUser appUser;
 
     @OneToMany(mappedBy = "project", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Plan> plans;
+    private List<Goal> goals;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Log log;
 
+    private String name;
+    private String description;
+    private boolean archived;
+
     public Project() {}
 
-    public Project(AppUser owner, CreateProjectDTO createProjectDTO) {
-        this.owner = owner;
+    public Project(AppUser appUser, CreateProjectDTO createProjectDTO) {
+        this.appUser = appUser;
         this.name = createProjectDTO.name();
         this.description = createProjectDTO.description();
         this.log = null;
-        this.plans = new ArrayList<>();
+        this.goals = new ArrayList<>();
+        this.archived = false;
     }
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public AppUser getUser() {
+        return appUser;
+    }
+
+    public void setUser(AppUser appUser) {
+        this.appUser = appUser;
+    }
+
+    public List<Goal> getGoals() {
+        return goals;
+    }
+
+    public void setGoals(List<Goal> goals) {
+        this.goals = goals;
+    }
+
+    public Log getLog() {
+        return log;
+    }
+
+    public void setLog(Log log) {
+        this.log = log;
     }
 
     public String getName() {
@@ -62,35 +83,23 @@ public class Project {
         this.description = description;
     }
 
-    public List<Plan> getPlans() {
-        return plans;
+    public boolean isArchived() {
+        return archived;
     }
 
-    public void setPlans(List<Plan> plans) {
-        this.plans = plans;
-    }
-
-    public Log getLog() {
-        return log;
-    }
-
-    public void setLog(Log log) {
-        this.log = log;
-    }
-
-    public String getOwnerUuid() {
-        return owner.getUuid();
+    public void setArchived(boolean archived) {
+        this.archived = archived;
     }
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Project project = (Project) o;
-        return Objects.equals(id, project.id) && Objects.equals(owner, project.owner) && Objects.equals(name, project.name) && Objects.equals(description, project.description) && Objects.equals(plans, project.plans) && Objects.equals(log, project.log);
+        return archived == project.archived && Objects.equals(id, project.id) && Objects.equals(appUser, project.appUser) && Objects.equals(goals, project.goals) && Objects.equals(log, project.log) && Objects.equals(name, project.name) && Objects.equals(description, project.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, owner, name, description, plans, log);
+        return Objects.hash(id, appUser, goals, log, name, description, archived);
     }
 }

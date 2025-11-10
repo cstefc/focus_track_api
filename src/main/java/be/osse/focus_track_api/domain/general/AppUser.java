@@ -1,14 +1,14 @@
 package be.osse.focus_track_api.domain.general;
 
 import be.osse.focus_track_api.domain.authorization.GrantedAuthorityFactory;
-import be.osse.focus_track_api.domain.authorization.Role;
+import be.osse.focus_track_api.domain.planning.Event;
+import be.osse.focus_track_api.domain.predefined.Role;
 import be.osse.focus_track_api.domain.projects.Project;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 public class AppUser implements UserDetails {
@@ -17,14 +17,16 @@ public class AppUser implements UserDetails {
     @Column(unique = true,  nullable = false, updatable = false)
     private String uuid;
 
+    @OneToMany(cascade = CascadeType.ALL,  fetch = FetchType.EAGER, mappedBy = "appUser")
+    private List<Project>  projects;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "appUser")
+    private List<Event> events;
+
     private String name;
-
     private String email;
-
     private List<Role> roles;
 
-    @OneToMany(cascade = CascadeType.ALL,  fetch = FetchType.EAGER, mappedBy = "owner")
-    private List<Project>  projects;
 
     public AppUser() {}
 
@@ -55,20 +57,20 @@ public class AppUser implements UserDetails {
         this.email = email;
     }
 
-    public List<Project> getProjects() {
-        return projects;
-    }
-
-    public void setProjects(List<Project> projects) {
-        this.projects = projects;
-    }
-
     public List<Role> getRoles() {
         return roles;
     }
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    public List<Event> getEvents() {
+        return events;
     }
 
     @Override
@@ -86,15 +88,4 @@ public class AppUser implements UserDetails {
         return this.uuid;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        AppUser appUser = (AppUser) o;
-        return Objects.equals(uuid, appUser.uuid) && Objects.equals(name, appUser.name) && Objects.equals(email, appUser.email) && Objects.equals(roles, appUser.roles) && Objects.equals(projects, appUser.projects);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(uuid, name, email, roles, projects);
-    }
 }

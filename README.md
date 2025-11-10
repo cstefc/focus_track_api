@@ -32,7 +32,7 @@ This API is part of a full-stack project. The corresponding front-end can be fou
 
 The project follows a **feature-driven development approach**, starting from the front-end and then integrating with the back-end. Planned features include:
 - **Project Management** – Ability to create and manage projects.  
-- **Plans & Steps** – Add detailed plans with steps inside projects.  
+- **Plans & Steps** – Add detailed goals with steps inside projects.  
 - **Logging Feature** – Track progress and updates within projects.  
 - **Events** – Add and manage events related to goals and projects.
 
@@ -40,7 +40,7 @@ The project follows a **feature-driven development approach**, starting from the
 ## Usage / Examples
 
 ### Prerequisites
-- **PostgreSQL** database + user for the API
+- **PostgreSQL** database + appUser for the API
 - **Firebase Project**
 - **Java 21** installed  
 
