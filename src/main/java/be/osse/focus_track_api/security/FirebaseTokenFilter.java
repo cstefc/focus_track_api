@@ -10,6 +10,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,6 +24,9 @@ import java.util.List;
 @Component
 public class FirebaseTokenFilter extends OncePerRequestFilter {
 
+    @Value("${development-mode:false}")
+    private boolean developmentMode;
+
     private final AppUserService appUserService;
 
     @Autowired
@@ -35,6 +39,23 @@ public class FirebaseTokenFilter extends OncePerRequestFilter {
                                     @NonNull HttpServletResponse response,
                                     @NonNull FilterChain filterChain) throws ServletException, IOException {
         String header = request.getHeader("Authorization");
+
+        if (developmentMode) {
+            AppUser appUser = new AppUser(
+                    "dev-001",
+                    "Alice Developer",
+                    "alice.developer@focustrack.com",
+                    List.of(Role.ADMIN, Role.USER)
+            );
+
+            // Set authenticated principal (we only need UID)
+            UsernamePasswordAuthenticationToken authentication =
+                    new UsernamePasswordAuthenticationToken(appUser, null, Collections.emptyList());
+
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            System.out.println("Development Mode Used: "+request.getMethod());
+            return;
+        }
 
         if (header != null && header.startsWith("Bearer ")) {
             String idToken = header.substring(7);
