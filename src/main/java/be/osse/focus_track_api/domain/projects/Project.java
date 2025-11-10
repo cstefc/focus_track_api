@@ -2,7 +2,7 @@ package be.osse.focus_track_api.domain.projects;
 
 import be.osse.focus_track_api.domain.general.AppUser;
 import be.osse.focus_track_api.domain.logging.Log;
-import be.osse.focus_track_api.dto.project.CreateProjectDTO;
+import be.osse.focus_track_api.dto.projects.CreateProjectDTO;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
