@@ -28,7 +28,11 @@ public class SecurityConfig {
                         .requestMatchers("/public/**").permitAll()
                         .anyRequest().authenticated()
                 )
-                .addFilterBefore(firebaseTokenFilter, UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(firebaseTokenFilter, UsernamePasswordAuthenticationFilter.class)
+
+                // Disable default login form
+                .httpBasic(AbstractHttpConfigurer::disable)
+                .formLogin(AbstractHttpConfigurer::disable);
 
         return http.build();
     }
