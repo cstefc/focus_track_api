@@ -1,5 +1,3 @@
-
-
 # Focus Track API
 
 ![status](https://img.shields.io/badge/status-WIP-yellow)
@@ -24,7 +22,7 @@ This API is part of a full-stack project. The corresponding front-end can be fou
 - **Environment Variables**: Sensitive information such as database credentials is stored in `.env` files.  
 - **OAuth2 Authentication** – Secure communication between front-end and back-end.  
 - **Endpoints**:
-     - `/project`: get
+     - `/projects`: GET, POST
 - **Mock Data**: Pre-generated data available for front-end development and testing purposes.  
 
 > ⚠️ Note: Additional endpoints for todos, goal tracking, and sports sessions are planned as the API continues development.
@@ -77,4 +75,12 @@ Once the server is running, go to `http://localhost:8080/public/docs` to see the
 Please note that you can only access the endpoints when you have following header in the request:
 ```
 Authorization: Bearer *JWT token from Firebase login*
+```
+
+### Development mode (WARNING: Do not use in production!)
+To enable the development modus to bypass the token verification, you need to update 'application.properties'.  
+At the end of the file you need to set the following settings to true:
+```
+development-mode=true
+spring.jpa.defer-datasource-initialization=true
 ```
