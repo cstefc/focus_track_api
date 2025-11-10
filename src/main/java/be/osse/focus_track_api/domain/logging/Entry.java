@@ -12,8 +12,9 @@ public class Entry {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @ManyToOne
     private Log log;
+
     private String title;
     private String description;
     private int scoring;

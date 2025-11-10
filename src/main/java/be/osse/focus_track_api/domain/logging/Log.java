@@ -1,10 +1,8 @@
 package be.osse.focus_track_api.domain.logging;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -12,6 +10,10 @@ public class Log {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @OneToMany(cascade = CascadeType.ALL,  fetch = FetchType.LAZY, mappedBy = "log")
+    private List<Entry> entries;
+
     private boolean archived;
 
     public Long getId() {

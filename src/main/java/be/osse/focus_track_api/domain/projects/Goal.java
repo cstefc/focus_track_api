@@ -17,7 +17,7 @@ public class Goal {
     @ManyToOne
     private Project project;
 
-    @OneToMany(mappedBy = "goal", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "goal", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Step> steps;
 
     private String description;

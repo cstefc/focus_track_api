@@ -17,7 +17,7 @@ public class Event {
     @ManyToOne
     private AppUser appUser;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Log log;
 
     private String name;
