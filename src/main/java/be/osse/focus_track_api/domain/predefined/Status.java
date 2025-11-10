@@ -1,4 +1,4 @@
-package be.osse.focus_track_api.domain.projects.predefined;
+package be.osse.focus_track_api.domain.predefined;
 
 public enum Status {
     Waiting,

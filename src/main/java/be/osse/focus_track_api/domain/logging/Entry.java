@@ -1,9 +1,7 @@
 package be.osse.focus_track_api.domain.logging;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import be.osse.focus_track_api.domain.predefined.EntryType;
+import jakarta.persistence.*;
 
 import java.util.Objects;
 
@@ -14,16 +12,23 @@ public class Entry {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @OneToOne
+    private Log log;
     private String title;
     private String description;
     private int scoring;
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    private EntryType entryType;
 
     public Long getId() {
         return id;
+    }
+
+    public Log getLog() {
+        return log;
+    }
+
+    public void setLog(Log log) {
+        this.log = log;
     }
 
     public String getTitle() {
@@ -50,15 +55,23 @@ public class Entry {
         this.scoring = scoring;
     }
 
+    public EntryType getEntryType() {
+        return entryType;
+    }
+
+    public void setEntryType(EntryType entryType) {
+        this.entryType = entryType;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Entry entry = (Entry) o;
-        return scoring == entry.scoring && Objects.equals(id, entry.id) && Objects.equals(title, entry.title) && Objects.equals(description, entry.description);
+        return scoring == entry.scoring && Objects.equals(id, entry.id) && Objects.equals(log, entry.log) && Objects.equals(title, entry.title) && Objects.equals(description, entry.description) && entryType == entry.entryType;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, description, scoring);
+        return Objects.hash(id, log, title, description, scoring, entryType);
     }
 }
