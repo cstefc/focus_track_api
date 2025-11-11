@@ -13,8 +13,7 @@ import java.util.List;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class ProjectServiceTest {
@@ -43,6 +42,7 @@ public class ProjectServiceTest {
         List<Project> results = projectService.findAllByUser(appUser);
 
         // THEN
+        verify(projectRepo).findByAppUserUuid(uuid);
         assertEquals(projects, results);
     }
 
@@ -57,6 +57,7 @@ public class ProjectServiceTest {
         Project result = projectService.save(project);
 
         // THEN
+        verify(projectRepo).save(project);
         assertEquals(saved, result);
     }
 }
