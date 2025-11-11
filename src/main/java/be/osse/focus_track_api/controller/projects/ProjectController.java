@@ -6,7 +6,7 @@ import be.osse.focus_track_api.domain.projects.Project;
 import be.osse.focus_track_api.dto.projects.CreateProjectDTO;
 import be.osse.focus_track_api.dto.projects.GetProjectDTO;
 import be.osse.focus_track_api.service.logging.LogService;
-import be.osse.focus_track_api.service.projects.ProjectMapperService;
+import be.osse.focus_track_api.service.projects.ProjectMapper;
 import be.osse.focus_track_api.service.projects.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -20,11 +20,11 @@ import java.util.List;
 @RestController
 public class ProjectController {
     private final ProjectService projectService;
-    private final ProjectMapperService projectMapper;
+    private final ProjectMapper projectMapper;
     private final LogService logService;
 
     @Autowired
-    public ProjectController(final ProjectService projectService, final ProjectMapperService projectMapper, LogService logService) {
+    public ProjectController(final ProjectService projectService, final ProjectMapper projectMapper, LogService logService) {
         this.projectService = projectService;
         this.projectMapper = projectMapper;
         this.logService = logService;

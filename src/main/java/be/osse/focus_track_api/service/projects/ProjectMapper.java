@@ -8,7 +8,7 @@ import be.osse.focus_track_api.dto.projects.GetProjectDTO;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ProjectMapperService {
+public class ProjectMapper {
     public GetProjectDTO toGetProjectDTO(Project project) {
         return new GetProjectDTO(project.getId(), project.getUser().getUuid(), project.getName(), project.getDescription(), project.isArchived());
     }
