@@ -1,4 +1,4 @@
-package be.osse.focus_track_api.controller.general;
+package be.osse.focus_track_api.controller.projects;
 
 
 import org.junit.jupiter.api.Test;
@@ -13,26 +13,25 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("it")
-class AppUserControllerIT {
+class ProjectControllerIT {
 
     @Autowired
     MockMvc mvc;
 
     @Test
-    void testGetAppUser() throws Exception {
+    void testFindAll() throws Exception {
         // GIVEN
 
         // WHEN
-        mvc.perform(get("/user")
+        mvc.perform(get("/projects")
                         .contentType(MediaType.APPLICATION_JSON))
 
                 // THEN
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.uuid").value("dev-001"));
-
+                .andExpect(jsonPath("$.[0].app_user_uuid").value("dev-001"))
+                .andExpect(jsonPath("$.length()").value("3"));
     }
 }
