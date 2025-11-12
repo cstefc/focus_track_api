@@ -2,7 +2,6 @@ package be.osse.focus_track_api.domain.projects;
 
 import be.osse.focus_track_api.domain.predefined.Priority;
 import jakarta.persistence.*;
-import org.springframework.security.core.parameters.P;
 
 import java.sql.Timestamp;
 import java.util.List;
