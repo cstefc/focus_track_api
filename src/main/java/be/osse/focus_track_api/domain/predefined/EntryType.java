@@ -4,5 +4,4 @@ public enum EntryType {
     REPORT,
     EVALUATION,
     RESULT,
-
 }

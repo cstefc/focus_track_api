@@ -13,7 +13,7 @@ import java.util.Objects;
 public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @ManyToOne
     private AppUser appUser;
@@ -21,18 +21,19 @@ public class Project {
     @OneToMany(mappedBy = "project", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Goal> goals;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Log log;
+    @OneToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Log log = new Log();
 
-    private String name;
+    @Column(nullable = false)
+    private String title;
     private String description;
-    private boolean archived;
+    private boolean archived = false;
 
     public Project() {}
 
     public Project(AppUser appUser, CreateProjectDTO createProjectDTO) {
         this.appUser = appUser;
-        this.name = createProjectDTO.name();
+        this.title = createProjectDTO.name();
         this.description = createProjectDTO.description();
         this.log = null;
         this.goals = new ArrayList<>();
@@ -67,12 +68,12 @@ public class Project {
         this.log = log;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getDescription() {
@@ -95,11 +96,11 @@ public class Project {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Project project = (Project) o;
-        return archived == project.archived && Objects.equals(id, project.id) && Objects.equals(appUser, project.appUser) && Objects.equals(goals, project.goals) && Objects.equals(log, project.log) && Objects.equals(name, project.name) && Objects.equals(description, project.description);
+        return archived == project.archived && Objects.equals(id, project.id) && Objects.equals(appUser, project.appUser) && Objects.equals(goals, project.goals) && Objects.equals(log, project.log) && Objects.equals(title, project.title) && Objects.equals(description, project.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, appUser, goals, log, name, description, archived);
+        return Objects.hash(id, appUser, goals, log, title, description, archived);
     }
 }

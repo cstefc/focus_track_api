@@ -32,7 +32,7 @@ public class ProjectMapperTest {
         Project project = mock(Project.class);
 
         when(project.getId()).thenReturn(420L);
-        when(project.getName()).thenReturn("Test Project");
+        when(project.getTitle()).thenReturn("Test Project");
         when(project.getDescription()).thenReturn("Test Project");
         when(project.isArchived()).thenReturn(false);
 
@@ -45,10 +45,9 @@ public class ProjectMapperTest {
 
         // THEN
         assertEquals(420L, getProjectDTO.id());
-        assertEquals(project.getName(), getProjectDTO.name());
+        assertEquals(project.getTitle(), getProjectDTO.title());
         assertEquals(project.getDescription(), getProjectDTO.description());
         assertEquals(project.isArchived(), getProjectDTO.archived());
-        assertEquals(project.getUser().getUuid(), getProjectDTO.app_user_uuid());
     }
 
     @Test
@@ -62,7 +61,7 @@ public class ProjectMapperTest {
         Project result = projectMapper.toProject(createProjectDTO, appUser, log);
 
         // THEN
-        assertEquals(createProjectDTO.name(), result.getName());
+        assertEquals(createProjectDTO.name(), result.getTitle());
         assertEquals(createProjectDTO.description(), result.getDescription());
         assertEquals(appUser, result.getUser());
         assertEquals(log, result.getLog());

@@ -4,8 +4,8 @@ import be.osse.focus_track_api.domain.predefined.Status;
 
 import java.sql.Timestamp;
 
-public record CreateStepDTO(
-        long goalId,
+public record GetStepDTO(
+        int id,
         int sequence,
         String objective,
         String description,

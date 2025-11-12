@@ -10,14 +10,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProjectMapper {
     public GetProjectDTO toGetProjectDTO(Project project) {
-        return new GetProjectDTO(project.getId(), project.getUser().getUuid(), project.getName(), project.getDescription(), project.isArchived());
+        return new GetProjectDTO(project.getId(), project.getTitle(), project.getDescription(), project.isArchived());
     }
 
     public Project toProject(CreateProjectDTO dto, AppUser appUser, Log log) {
         Project project = new Project();
         project.setUser(appUser);
         project.setLog(log);
-        project.setName(dto.name());
+        project.setTitle(dto.name());
         project.setDescription(dto.description());
         project.setArchived(false);
         return project;

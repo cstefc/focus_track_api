@@ -4,7 +4,6 @@ import be.osse.focus_track_api.domain.general.AppUser;
 import be.osse.focus_track_api.domain.logging.Log;
 import jakarta.persistence.*;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.Objects;
 
@@ -12,22 +11,28 @@ import java.util.Objects;
 public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @ManyToOne
     private AppUser appUser;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Log log;
+    @OneToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Log log = new Log();
 
-    private String name;
+    @Column(nullable = false)
+    private String title;
     private String description;
-    private Date start;
-    private Timestamp duration;
-    private Timestamp finish_time;
+
+    @Column(nullable = false)
+    private Timestamp start;
+
+    @Column(nullable = false)
+    private Timestamp plannedStop;
+    private Timestamp stop;
+
     private boolean timed;
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
@@ -39,12 +44,12 @@ public class Event {
         this.appUser = appUser;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getDescription() {
@@ -55,28 +60,28 @@ public class Event {
         this.description = description;
     }
 
-    public Date getStart() {
+    public Timestamp getStart() {
         return start;
     }
 
-    public void setStart(Date start) {
+    public void setStart(Timestamp start) {
         this.start = start;
     }
 
-    public Timestamp getDuration() {
-        return duration;
+    public Timestamp getPlannedStop() {
+        return plannedStop;
     }
 
-    public void setDuration(Timestamp duration) {
-        this.duration = duration;
+    public void setPlannedStop(Timestamp plannedStop) {
+        this.plannedStop = plannedStop;
     }
 
-    public Timestamp getFinish_time() {
-        return finish_time;
+    public Timestamp getStop() {
+        return stop;
     }
 
-    public void setFinish_time(Timestamp finish_time) {
-        this.finish_time = finish_time;
+    public void setStop(Timestamp stop) {
+        this.stop = stop;
     }
 
     public Log getLog() {
@@ -99,11 +104,11 @@ public class Event {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Event event = (Event) o;
-        return timed == event.timed && Objects.equals(id, event.id) && Objects.equals(appUser, event.appUser) && Objects.equals(name, event.name) && Objects.equals(description, event.description) && Objects.equals(start, event.start) && Objects.equals(duration, event.duration) && Objects.equals(finish_time, event.finish_time) && Objects.equals(log, event.log);
+        return timed == event.timed && Objects.equals(id, event.id) && Objects.equals(appUser, event.appUser) && Objects.equals(title, event.title) && Objects.equals(description, event.description) && Objects.equals(start, event.start) && Objects.equals(plannedStop, event.plannedStop) && Objects.equals(stop, event.stop) && Objects.equals(log, event.log);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, appUser, name, description, start, duration, finish_time, log, timed);
+        return Objects.hash(id, appUser, title, description, start, plannedStop, stop, log, timed);
     }
 }

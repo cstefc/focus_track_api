@@ -9,14 +9,15 @@ import java.util.Objects;
 public class Log {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
-    @OneToMany(cascade = CascadeType.ALL,  fetch = FetchType.LAZY, mappedBy = "log")
+    @OneToMany(cascade = CascadeType.ALL,  fetch = FetchType.EAGER, mappedBy = "log")
     private List<Entry> entries;
 
-    private boolean archived;
+    @Column(nullable = false)
+    private boolean archived = false;
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 

@@ -10,17 +10,23 @@ public class Entry {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @ManyToOne
     private Log log;
 
+    @Column(nullable = false)
     private String title;
-    private String description;
-    private int scoring;
-    private EntryType entryType;
 
-    public Long getId() {
+    private String description;
+
+    @Column(nullable = false)
+    private int scoring;
+
+    @Column(nullable = false)
+    private EntryType entryType = EntryType.EVALUATION;
+
+    public long getId() {
         return id;
     }
 

@@ -1,8 +1,8 @@
 package be.osse.focus_track_api.domain.projects;
 
-import be.osse.focus_track_api.domain.logging.Log;
 import be.osse.focus_track_api.domain.predefined.Priority;
 import jakarta.persistence.*;
+import org.springframework.security.core.parameters.P;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -12,7 +12,7 @@ import java.util.Objects;
 public class Goal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @ManyToOne
     private Project project;
@@ -20,8 +20,12 @@ public class Goal {
     @OneToMany(mappedBy = "goal", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Step> steps;
 
+    @Column(nullable = false)
+    private String title;
     private String description;
-    private Priority priority;
+
+    @Column(nullable = false)
+    private Priority priority = Priority.Medium;
     private Timestamp estimated;
 
     public Goal(){}
@@ -44,6 +48,14 @@ public class Goal {
 
     public void setSteps(List<Step> steps) {
         this.steps = steps;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getDescription() {

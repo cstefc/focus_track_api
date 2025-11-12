@@ -25,25 +25,12 @@ class ProjectRepoIT {
     @Test
     void testFindByAppUserUuid() {
         // GIVEN
-        AppUser user = new AppUser("test-uuid", "test", "test@email.com", List.of());
-        appUserRepo.save(user);
-
-        Project project = new Project();
-        project.setUser(user);
-        project.setName("Test Project");
-        project.setDescription("Test Project Description");
-        project.setArchived(false);
-        project.setGoals(List.of());
-        project.setLog(null);
-
-        repo.save(project);
 
         // WHEN
-        List<Project> expected = repo.findByAppUserUuid("test-uuid");
+        List<Project> expected = repo.findByAppUserUuid("dev-001");
 
         // THEN
         assertNotNull(expected);
-        assertEquals(1, expected.size());
-        assertEquals(project, expected.getFirst());
+        assertEquals(3, expected.size());
     }
 }

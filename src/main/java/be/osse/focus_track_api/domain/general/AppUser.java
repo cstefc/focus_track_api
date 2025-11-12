@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -23,10 +24,13 @@ public class AppUser implements UserDetails {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "appUser")
     private List<Event> events;
 
+    @Column(nullable = false)
     private String name;
-    private String email;
-    private List<Role> roles;
 
+    @Column(nullable = false)
+    private String email;
+
+    private List<Role> roles = new ArrayList<>();
 
     public AppUser() {}
 

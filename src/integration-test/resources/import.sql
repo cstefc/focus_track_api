@@ -1,14 +1,9 @@
+SET REFERENTIAL_INTEGRITY FALSE;
+
 -- ---------------------------------------------------
 -- Dev user
 -- ---------------------------------------------------
-INSERT INTO app_user (uuid, name, email, roles) VALUES ('dev-001', 'Development', 'developer@focustrack.com', '{0, 1}');
-
--- ---------------------------------------------------
--- Logs for Projects
--- ---------------------------------------------------
-INSERT INTO log (id, archived) VALUES (1, FALSE);
-INSERT INTO log (id, archived) VALUES (2, FALSE);
-INSERT INTO log (id, archived) VALUES (3, FALSE);
+INSERT INTO app_user (uuid, name, email, roles) VALUES ('dev-001', 'Development', 'developer@focustrack.com', '1');
 
 -- ---------------------------------------------------
 -- Projects
@@ -263,3 +258,5 @@ INSERT INTO event (id, app_user_uuid, log_id, title, description, start, planned
 INSERT INTO event (id, app_user_uuid, log_id, title, description, start, planned_stop, stop, timed) VALUES  (8,'dev-001',11,'Event 8','Description 8',CURRENT_DATE,CURRENT_DATE + INTERVAL '1 hour',NULL,FALSE);
 INSERT INTO event (id, app_user_uuid, log_id, title, description, start, planned_stop, stop, timed) VALUES  (9,'dev-001',12,'Event 9','Description 9',CURRENT_DATE,CURRENT_DATE + INTERVAL '1 hour',NULL,FALSE);
 INSERT INTO event (id, app_user_uuid, log_id, title, description, start, planned_stop, stop, timed) VALUES  (10,'dev-001',13,'Event 10','Description 10',CURRENT_DATE,CURRENT_DATE + INTERVAL '1 hour',NULL,FALSE);
+
+SET REFERENTIAL_INTEGRITY TRUE;

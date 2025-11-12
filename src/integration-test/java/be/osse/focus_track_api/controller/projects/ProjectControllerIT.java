@@ -31,7 +31,7 @@ class ProjectControllerIT {
 
                 // THEN
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.[0].app_user_uuid").value("dev-001"))
+                .andExpect(jsonPath("$.[0].title").value("Project Alpha"))
                 .andExpect(jsonPath("$.length()").value("3"));
     }
 }

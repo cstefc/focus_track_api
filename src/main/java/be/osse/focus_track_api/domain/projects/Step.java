@@ -11,19 +11,24 @@ public class Step {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     @ManyToOne
     private Goal goal;
 
     private int sequence;
+
+    @Column(nullable = false)
     private String objective;
     private String description;
     private String requirements;
-    private Status status;
-    private Timestamp completedAt;
 
-    public int getId() {
+    @Column(nullable = false)
+    private Status status = Status.NotStarted;
+
+    private Timestamp completedAt = null;
+
+    public long getId() {
         return id;
     }
 

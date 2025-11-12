@@ -4,7 +4,9 @@ import be.osse.focus_track_api.domain.predefined.Priority;
 
 import java.sql.Timestamp;
 
-public record CreateGoalDTO(
+public record GetGoalDTO(
+        long id,
+
         String title,
         String description,
 
