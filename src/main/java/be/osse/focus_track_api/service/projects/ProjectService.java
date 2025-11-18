@@ -22,8 +22,25 @@ public class ProjectService {
         return projectRepo.findByAppUserUuid(appUser.getUuid());
     }
 
+    public Project findById(Long id) {
+        return projectRepo.findById(id).orElse(null);
+    }
+
     public Project save(Project project) {
         return projectRepo.save(project);
     }
 
+    public void delete(Project project) {
+        final AppUser user = project.getUser();
+        user.getProjects().remove(project);
+        projectRepo.delete(project);
+    }
+
+    public Project update(long id, Project project) {
+        final Project original = projectRepo.findById(id).orElseThrow();
+        original.setTitle(project.getTitle());
+        original.setDescription(project.getDescription());
+        original.setArchived(project.isArchived());
+        return projectRepo.save(original);
+    }
 }

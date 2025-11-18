@@ -4,7 +4,7 @@ import be.osse.focus_track_api.domain.general.AppUser;
 import be.osse.focus_track_api.domain.logging.Log;
 import be.osse.focus_track_api.domain.projects.Project;
 import be.osse.focus_track_api.dto.projects.CreateProjectDTO;
-import be.osse.focus_track_api.dto.projects.GetProjectDTO;
+import be.osse.focus_track_api.dto.projects.ProjectDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,7 +26,7 @@ public class ProjectMapperTest {
     }
 
     @Test
-    void testToGetProjectDTO() {
+    void testToProjectDTO() {
         // GIVEN
         AppUser appUser = mock(AppUser.class);
         Project project = mock(Project.class);
@@ -36,35 +36,31 @@ public class ProjectMapperTest {
         when(project.getDescription()).thenReturn("Test Project");
         when(project.isArchived()).thenReturn(false);
 
-        when(appUser.getUuid()).thenReturn(UUID.randomUUID().toString());
-        when(project.getUser()).thenReturn(appUser);
-
-
         // WHEN
-        GetProjectDTO getProjectDTO = projectMapper.toGetProjectDTO(project);
+        ProjectDTO projectDTO = projectMapper.toProjectDTO(project);
 
         // THEN
-        assertEquals(420L, getProjectDTO.id());
-        assertEquals(project.getTitle(), getProjectDTO.title());
-        assertEquals(project.getDescription(), getProjectDTO.description());
-        assertEquals(project.isArchived(), getProjectDTO.archived());
+        assertEquals(420L, projectDTO.id());
+        assertEquals(project.getTitle(), projectDTO.title());
+        assertEquals(project.getDescription(), projectDTO.description());
+        assertEquals(project.isArchived(), projectDTO.archived());
     }
 
     @Test
     void testToProject() {
         // GIVEN
-        CreateProjectDTO createProjectDTO = new CreateProjectDTO("name", "desc");
+        CreateProjectDTO createProjectDTO = new CreateProjectDTO("name", "desc", false);
         AppUser appUser = mock(AppUser.class);
         Log log = mock(Log.class);
 
         // WHEN
-        Project result = projectMapper.toProject(createProjectDTO, appUser, log);
+        Project result = projectMapper.toProject(createProjectDTO, appUser);
 
         // THEN
-        assertEquals(createProjectDTO.name(), result.getTitle());
+        assertEquals(createProjectDTO.title(), result.getTitle());
         assertEquals(createProjectDTO.description(), result.getDescription());
         assertEquals(appUser, result.getUser());
-        assertEquals(log, result.getLog());
+        assertNotNull(result.getLog());
         assertFalse(result.isArchived());
         assertNull(result.getId());
     }

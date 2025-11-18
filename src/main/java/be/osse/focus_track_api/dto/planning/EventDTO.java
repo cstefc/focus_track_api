@@ -2,7 +2,7 @@ package be.osse.focus_track_api.dto.planning;
 
 import java.sql.Timestamp;
 
-public record GetEventDTO(
+public record EventDTO(
         long id,
         long log_id,
 
