@@ -11,7 +11,7 @@ import java.util.Objects;
 public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @ManyToOne
     private AppUser appUser;
@@ -32,7 +32,7 @@ public class Event {
 
     private boolean timed;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 

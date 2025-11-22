@@ -13,7 +13,7 @@ import java.util.Objects;
 public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @ManyToOne
     private AppUser appUser;
@@ -21,7 +21,7 @@ public class Project {
     @OneToMany(mappedBy = "project", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Goal> goals;
 
-    @OneToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(optional = false, orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Log log = new Log();
 
     @Column(nullable = false)
@@ -33,7 +33,7 @@ public class Project {
 
     public Project(AppUser appUser, CreateProjectDTO createProjectDTO) {
         this.appUser = appUser;
-        this.title = createProjectDTO.name();
+        this.title = createProjectDTO.title();
         this.description = createProjectDTO.description();
         this.log = null;
         this.goals = new ArrayList<>();

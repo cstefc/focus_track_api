@@ -16,6 +16,7 @@ INSERT INTO log (id, archived) VALUES (3, FALSE);
 INSERT INTO project (app_user_uuid, title, description, log_id, archived) VALUES ('dev-001', 'Project Alpha', 'Description of Project Alpha', 1,FALSE);
 INSERT INTO project (app_user_uuid, title, description, log_id, archived) VALUES('dev-001','Project Beta', 'Description of Project Beta', 2, FALSE);
 INSERT INTO project (app_user_uuid, title, description, log_id, archived) VALUES ('dev-001', 'Project Gamma', 'Description of Project Gamma', 3, FALSE);
+SELECT setval('project_id_seq', (SELECT MAX(id) FROM project));
 
 -- ---------------------------------------------------
 -- Goals (5 per project)
@@ -38,6 +39,7 @@ INSERT INTO goal (id, project_id, title, description, priority, estimated) VALUE
 INSERT INTO goal (id, project_id, title, description, priority, estimated) VALUES (13,3,'Title 3 for Gamma', 'Goal 3 for Gamma',2,NULL);
 INSERT INTO goal (id, project_id, title, description, priority, estimated) VALUES (14,3,'Title 4 for Gamma', 'Goal 4 for Gamma',1,NULL);
 INSERT INTO goal (id, project_id, title, description, priority, estimated) VALUES (15,3,'Title 5 for Gamma', 'Goal 5 for Gamma',0,NULL);
+SELECT setval('goal_id_seq', (SELECT MAX(id) FROM goal));
 
 -- ---------------------------------------------------
 -- Steps (10 per goal)
@@ -221,7 +223,7 @@ INSERT INTO step (id, goal_id, sequence, objective, description, requirements, s
 INSERT INTO step (id, goal_id, sequence, objective, description, requirements, status, completed_at) VALUES(148,15,8,'Objective 8','Step description 8','None',0,NULL);
 INSERT INTO step (id, goal_id, sequence, objective, description, requirements, status, completed_at) VALUES(149,15,9,'Objective 9','Step description 9','None',0,NULL);
 INSERT INTO step (id, goal_id, sequence, objective, description, requirements, status, completed_at) VALUES(150,15,10,'Objective 10','Step description 10','None',0,NULL);
-
+SELECT setval('step_id_seq', (SELECT MAX(id) FROM step));
 
 -- ---------------------------------------------------
 -- Entries for project logs (2 entries per project)
@@ -233,6 +235,7 @@ INSERT INTO entry (id, log_id, title, description, scoring, entry_type) VALUES (
 INSERT INTO entry (id, log_id, title, description, scoring, entry_type) VALUES (4,2,'Entry 2','Description 2',2,1);
 INSERT INTO entry (id, log_id, title, description, scoring, entry_type) VALUES (5,3,'Entry 1','Description 1',5,0);
 INSERT INTO entry (id, log_id, title, description, scoring, entry_type) VALUES (6,3,'Entry 2','Description 2',1,1);
+SELECT setval('entry_id_seq', (SELECT MAX(id) FROM entry));
 
 -- ---------------------------------------------------
 -- Logs for events
@@ -248,6 +251,7 @@ INSERT INTO log (id, archived) VALUES (10,FALSE);
 INSERT INTO log (id, archived) VALUES (11,FALSE);
 INSERT INTO log (id, archived) VALUES (12,FALSE);
 INSERT INTO log (id, archived) VALUES (13,FALSE);
+SELECT setval('log_id_seq', (SELECT MAX(id) FROM log));
 
 -- ---------------------------------------------------
 -- Events (10 events for dev user)
@@ -263,3 +267,4 @@ INSERT INTO event (id, app_user_uuid, log_id, title, description, start, planned
 INSERT INTO event (id, app_user_uuid, log_id, title, description, start, planned_stop, stop, timed) VALUES  (8,'dev-001',11,'Event 8','Description 8',CURRENT_DATE,CURRENT_DATE + INTERVAL '1 hour',NULL,FALSE);
 INSERT INTO event (id, app_user_uuid, log_id, title, description, start, planned_stop, stop, timed) VALUES  (9,'dev-001',12,'Event 9','Description 9',CURRENT_DATE,CURRENT_DATE + INTERVAL '1 hour',NULL,FALSE);
 INSERT INTO event (id, app_user_uuid, log_id, title, description, start, planned_stop, stop, timed) VALUES  (10,'dev-001',13,'Event 10','Description 10',CURRENT_DATE,CURRENT_DATE + INTERVAL '1 hour',NULL,FALSE);
+SELECT setval('event_id_seq', (SELECT MAX(id) FROM event));

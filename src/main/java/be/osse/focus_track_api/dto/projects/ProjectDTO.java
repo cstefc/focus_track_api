@@ -1,6 +1,6 @@
 package be.osse.focus_track_api.dto.projects;
 
-public record GetProjectDTO(
+public record ProjectDTO(
         long id,
 
         String title,

@@ -10,7 +10,7 @@ public class Entry {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @ManyToOne
     private Log log;
@@ -26,7 +26,7 @@ public class Entry {
     @Column(nullable = false)
     private EntryType entryType = EntryType.EVALUATION;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 

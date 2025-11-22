@@ -9,7 +9,7 @@ import java.util.Objects;
 public class Log {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @OneToMany(cascade = CascadeType.ALL,  fetch = FetchType.EAGER, mappedBy = "log")
     private List<Entry> entries;
@@ -17,7 +17,7 @@ public class Log {
     @Column(nullable = false)
     private boolean archived = false;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
