@@ -5,12 +5,11 @@ import be.osse.focus_track_api.domain.logging.Log;
 import be.osse.focus_track_api.domain.projects.Project;
 import be.osse.focus_track_api.dto.projects.CreateProjectDTO;
 import be.osse.focus_track_api.dto.projects.ProjectDTO;
+import be.osse.focus_track_api.service.projects.project.ProjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;

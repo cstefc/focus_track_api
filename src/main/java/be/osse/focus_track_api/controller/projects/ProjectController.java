@@ -1,16 +1,13 @@
 package be.osse.focus_track_api.controller.projects;
 
-import be.osse.focus_track_api.domain.general.AppUser;
-import be.osse.focus_track_api.domain.projects.Project;
 import be.osse.focus_track_api.dto.projects.CreateProjectDTO;
 import be.osse.focus_track_api.dto.projects.ProjectDTO;
-import be.osse.focus_track_api.service.general.AppUserService;
-import be.osse.focus_track_api.service.projects.ProjectMapper;
-import be.osse.focus_track_api.service.projects.ProjectService;
+import be.osse.focus_track_api.dto.projects.UpdateProjectDTO;
+import be.osse.focus_track_api.service.projects.project.ProjectService;
+import be.osse.focus_track_api.service.projects.project.ProjectValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -19,67 +16,64 @@ import java.util.List;
 @RestController
 public class ProjectController {
     private final ProjectService projectService;
-    private final ProjectMapper projectMapper;
-    private final AppUserService appUserService;
+    private final ProjectValidator projectValidator;
 
     @Autowired
-    public ProjectController(final ProjectService projectService, final ProjectMapper projectMapper, final AppUserService appUserService) {
+    public ProjectController(
+            final ProjectService projectService,
+            final ProjectValidator projectValidator
+    ) {
         this.projectService = projectService;
-        this.projectMapper = projectMapper;
-        this.appUserService = appUserService;
-    }
-
-    @PostMapping("/projects")
-    public ProjectDTO createProject(@AuthenticationPrincipal AppUser appUser, @RequestBody CreateProjectDTO projectData) {
-        final Project project = projectMapper.toProject(projectData, appUser);
-        final Project saved = projectService.save(project);
-        return projectMapper.toProjectDTO(saved);
+        this.projectValidator = projectValidator;
     }
 
     @GetMapping("/projects")
-    public List<ProjectDTO> getProjects(@AuthenticationPrincipal AppUser appUser) {
-        List<Project> projects = projectService.findAllByUser(appUser);
-        return projects.stream().map(projectMapper::toProjectDTO).toList();
-    }
-
-    @GetMapping("/projects/{id}")
-    @Transactional(readOnly = true)
-    public ProjectDTO getProject(@AuthenticationPrincipal AppUser appUser, @PathVariable Long id) {
-        final AppUser user = appUserService.findByUuid(appUser.getUuid());
-        final Project project = projectService.findById(id);
-        if (user.getProjects().contains(project)) {
-            return projectMapper.toProjectDTO(project);
+    public List<ProjectDTO> getProject(
+            @AuthenticationPrincipal String uuid,
+            @RequestParam(required = false) Long id
+    ) {
+        if (id == null) {
+            return projectService.findAllByUser(uuid);
+        }
+        if (projectValidator.validateProjectAccess(uuid, id)) {
+            return List.of(projectService.getById(id));
         }
         throw new ResponseStatusException(HttpStatus.FORBIDDEN);
     }
 
-    @PutMapping("/projects/{id}")
-    @Transactional
-    public ProjectDTO updateProject(@AuthenticationPrincipal AppUser appUser,
-                                    @PathVariable Long id,
-                                    @RequestBody CreateProjectDTO projectData) {
-        final AppUser user = appUserService.findByUuid(appUser.getUuid());
-        final Project project = projectService.findById(id);
-        if (user.getProjects().contains(project)) {
-            final Project updated = projectMapper.toProject(projectData, appUser);
-            final Project saved = projectService.update(id, updated);
-            return projectMapper.toProjectDTO(saved);
+    @PostMapping("/projects")
+    public ProjectDTO createProject(
+            @AuthenticationPrincipal String uuid,
+            @RequestBody CreateProjectDTO projectData
+    ) {
+        if (projectValidator.validateCreateData(projectData)) {
+            return projectService.create(uuid, projectData);
         }
         throw new ResponseStatusException(HttpStatus.FORBIDDEN);
     }
 
-    @DeleteMapping("/projects/{id}")
-    @Transactional
-    public boolean deleteProject(@AuthenticationPrincipal AppUser appUser, @PathVariable Long id) {
-        final AppUser userWithSession = appUserService.findByUuid(appUser.getUuid());
-        final Project project = projectService.findById(id);
-        if (userWithSession.getProjects().contains(project)) {
-            projectService.delete(project);
-            return true;
+    @PutMapping("/projects")
+    public ProjectDTO updateProject(
+            @AuthenticationPrincipal String uuid,
+            @RequestBody UpdateProjectDTO data
+    ) {
+        if (projectValidator.validateUpdateData(uuid, data)) {
+            return projectService.update(data);
+        }
+        throw new ResponseStatusException(HttpStatus.FORBIDDEN);
+    }
+
+    @DeleteMapping("/projects/")
+    public void deleteProject(
+            @AuthenticationPrincipal String uuid,
+            @RequestParam long id
+    ) {
+        if (projectValidator.validateProjectAccess(uuid, id)
+        ) {
+            projectService.delete(id);
         } else {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN);
         }
     }
-
 
 }

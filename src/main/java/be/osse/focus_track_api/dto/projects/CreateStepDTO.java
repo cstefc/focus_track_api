@@ -1,7 +1,5 @@
 package be.osse.focus_track_api.dto.projects;
 
-import be.osse.focus_track_api.domain.predefined.Status;
-
 import java.sql.Timestamp;
 
 public record CreateStepDTO(
@@ -10,7 +8,7 @@ public record CreateStepDTO(
         String objective,
         String description,
         String requirements,
-        Status status,
+        int status,
         Timestamp completedAt
 ) {
 }

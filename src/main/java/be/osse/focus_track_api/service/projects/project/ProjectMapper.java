@@ -1,4 +1,4 @@
-package be.osse.focus_track_api.service.projects;
+package be.osse.focus_track_api.service.projects.project;
 
 import be.osse.focus_track_api.domain.general.AppUser;
 import be.osse.focus_track_api.domain.projects.Project;

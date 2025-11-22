@@ -1,14 +1,16 @@
 package be.osse.focus_track_api.dto.projects;
 
+import be.osse.focus_track_api.domain.predefined.Priority;
+
 import java.time.LocalTime;
 
-public record GoalDTO(
+public record UpdateGoalDTO(
         long id,
 
         String title,
         String description,
 
-        int priority,
+        Priority priority,
         LocalTime estimated
 ) {
 }
