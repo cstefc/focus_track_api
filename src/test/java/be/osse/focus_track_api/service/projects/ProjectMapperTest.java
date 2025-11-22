@@ -50,7 +50,6 @@ public class ProjectMapperTest {
         // GIVEN
         CreateProjectDTO createProjectDTO = new CreateProjectDTO("name", "desc", false);
         AppUser appUser = mock(AppUser.class);
-        Log log = mock(Log.class);
 
         // WHEN
         Project result = projectMapper.toProject(createProjectDTO, appUser);

@@ -12,8 +12,6 @@ public interface StepRepo extends CrudRepository<Step, Long> {
 
     boolean existsById(long id);
 
-    boolean existsByIdAndGoalId(long id, long goalId);
-
     boolean existsByIdAndSequence(long id, int sequence);
 
     @Query("SELECT g.id FROM Step s JOIN s.goal g where s.id = :id")
