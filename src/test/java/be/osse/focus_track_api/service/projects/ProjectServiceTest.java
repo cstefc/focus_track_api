@@ -60,14 +60,15 @@ public class ProjectServiceTest {
         // GIVEN
         String uuid = UUID.randomUUID().toString();
         CreateProjectDTO project = mock(CreateProjectDTO.class);
-        Project saved = mock(Project.class);
-        when(projectRepo.save(project)).thenReturn(saved);
+        ProjectDTO saved = mock(ProjectDTO.class);
+
+        when(projectRepo.save(any())).thenReturn(mock(Project.class));
+        when(projectMapper.toProjectDTO(any())).thenReturn(saved);
 
         // WHEN
-        Project result = projectService.create(uuid, project);
+        ProjectDTO result = projectService.create(uuid, project);
 
         // THEN
-        verify(projectRepo).save(project);
         assertEquals(saved, result);
     }
 }
