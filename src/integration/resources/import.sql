@@ -248,15 +248,15 @@ INSERT INTO log (id, archived) VALUES (13,FALSE);
 -- Events (10 events for dev user)
 -- ---------------------------------------------------
 
-INSERT INTO event (id, app_user_uuid, log_id, title, description, start, planned_stop, stop, timed) VALUES  (1,'dev-001',4,'Event 1','Description 1',CURRENT_DATE,CURRENT_DATE + INTERVAL '1 hour',NULL,FALSE);
-INSERT INTO event (id, app_user_uuid, log_id, title, description, start, planned_stop, stop, timed) VALUES  (2,'dev-001',5,'Event 2','Description 2',CURRENT_DATE,CURRENT_DATE + INTERVAL '1 hour',NULL,FALSE);
-INSERT INTO event (id, app_user_uuid, log_id, title, description, start, planned_stop, stop, timed) VALUES  (3,'dev-001',6,'Event 3','Description 3',CURRENT_DATE,CURRENT_DATE + INTERVAL '1 hour',NULL,FALSE);
-INSERT INTO event (id, app_user_uuid, log_id, title, description, start, planned_stop, stop, timed) VALUES  (4,'dev-001',7,'Event 4','Description 4',CURRENT_DATE,CURRENT_DATE + INTERVAL '1 hour',NULL,FALSE);
-INSERT INTO event (id, app_user_uuid, log_id, title, description, start, planned_stop, stop, timed) VALUES  (5,'dev-001',8,'Event 5','Description 5',CURRENT_DATE,CURRENT_DATE + INTERVAL '1 hour',NULL,FALSE);
-INSERT INTO event (id, app_user_uuid, log_id, title, description, start, planned_stop, stop, timed) VALUES  (6,'dev-001',9,'Event 6','Description 6',CURRENT_DATE,CURRENT_DATE + INTERVAL '1 hour',NULL,FALSE);
-INSERT INTO event (id, app_user_uuid, log_id, title, description, start, planned_stop, stop, timed) VALUES  (7,'dev-001',10,'Event 7','Description 7',CURRENT_DATE,CURRENT_DATE + INTERVAL '1 hour',NULL,FALSE);
-INSERT INTO event (id, app_user_uuid, log_id, title, description, start, planned_stop, stop, timed) VALUES  (8,'dev-001',11,'Event 8','Description 8',CURRENT_DATE,CURRENT_DATE + INTERVAL '1 hour',NULL,FALSE);
-INSERT INTO event (id, app_user_uuid, log_id, title, description, start, planned_stop, stop, timed) VALUES  (9,'dev-001',12,'Event 9','Description 9',CURRENT_DATE,CURRENT_DATE + INTERVAL '1 hour',NULL,FALSE);
-INSERT INTO event (id, app_user_uuid, log_id, title, description, start, planned_stop, stop, timed) VALUES  (10,'dev-001',13,'Event 10','Description 10',CURRENT_DATE,CURRENT_DATE + INTERVAL '1 hour',NULL,FALSE);
+INSERT INTO event (id, app_user_uuid, log_id, title, description, start, planned_stop, stop, timed) VALUES  (1,'dev-001',4,'Event 1','Description 1',CURRENT_DATE,DATEADD('HOUR', 1, CURRENT_DATE),NULL,FALSE);
+INSERT INTO event (id, app_user_uuid, log_id, title, description, start, planned_stop, stop, timed) VALUES  (2,'dev-001',5,'Event 2','Description 2',CURRENT_DATE,DATEADD('HOUR', 1, CURRENT_DATE),NULL,FALSE);
+INSERT INTO event (id, app_user_uuid, log_id, title, description, start, planned_stop, stop, timed) VALUES  (3,'dev-001',6,'Event 3','Description 3',CURRENT_DATE,DATEADD('HOUR', 1, CURRENT_DATE),NULL,FALSE);
+INSERT INTO event (id, app_user_uuid, log_id, title, description, start, planned_stop, stop, timed) VALUES  (4,'dev-001',7,'Event 4','Description 4',CURRENT_DATE,DATEADD('HOUR', 1, CURRENT_DATE),NULL,FALSE);
+INSERT INTO event (id, app_user_uuid, log_id, title, description, start, planned_stop, stop, timed) VALUES  (5,'dev-001',8,'Event 5','Description 5',CURRENT_DATE,DATEADD('HOUR', 1, CURRENT_DATE),NULL,FALSE);
+INSERT INTO event (id, app_user_uuid, log_id, title, description, start, planned_stop, stop, timed) VALUES  (6,'dev-001',9,'Event 6','Description 6',CURRENT_DATE,DATEADD('HOUR', 1, CURRENT_DATE),NULL,FALSE);
+INSERT INTO event (id, app_user_uuid, log_id, title, description, start, planned_stop, stop, timed) VALUES  (7,'dev-001',10,'Event 7','Description 7',CURRENT_DATE,DATEADD('HOUR', 1, CURRENT_DATE),NULL,FALSE);
+INSERT INTO event (id, app_user_uuid, log_id, title, description, start, planned_stop, stop, timed) VALUES  (8,'dev-001',11,'Event 8','Description 8',CURRENT_DATE,DATEADD('HOUR', 1, CURRENT_DATE),NULL,FALSE);
+INSERT INTO event (id, app_user_uuid, log_id, title, description, start, planned_stop, stop, timed) VALUES  (9,'dev-001',12,'Event 9','Description 9',CURRENT_DATE,DATEADD('HOUR', 1, CURRENT_DATE),NULL,FALSE);
+INSERT INTO event (id, app_user_uuid, log_id, title, description, start, planned_stop, stop, timed) VALUES  (10,'dev-001',13,'Event 10','Description 10',CURRENT_DATE,DATEADD('HOUR', 1, CURRENT_DATE),NULL,FALSE);
 
 SET REFERENTIAL_INTEGRITY TRUE;

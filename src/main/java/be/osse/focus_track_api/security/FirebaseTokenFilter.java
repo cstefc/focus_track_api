@@ -40,34 +40,31 @@ public class FirebaseTokenFilter extends OncePerRequestFilter {
         String header = request.getHeader("Authorization");
 
         if (developmentMode) {
-            AppUser appUser = appUserService.findByUuid("dev-001");
-
-            if (appUser == null) {
+            if (!appUserService.existsByUuid("dev-001")) {
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                 return;
             }
 
             // Set authenticated principal (we only need UID)
             UsernamePasswordAuthenticationToken authentication =
-                    new UsernamePasswordAuthenticationToken(appUser, null, appUser.getAuthorities());
+                    new UsernamePasswordAuthenticationToken("dev-001", null, null);
 
             SecurityContextHolder.getContext().setAuthentication(authentication);
-        }
-        else if (header != null && header.startsWith("Bearer ")) {
+        } else if (header != null && header.startsWith("Bearer ")) {
             String idToken = header.substring(7);
             try {
                 // Verify ID token (checks signature & expiration)
                 FirebaseToken decodedToken = FirebaseAuth.getInstance().verifyIdToken(idToken, true);
 
                 // Load user or create new one
-                AppUser appUser = appUserService.findByUuid(decodedToken.getUid());
-                if (appUser == null) {
-                    appUser = appUserService.save(new AppUser(decodedToken.getUid(), decodedToken.getName(), decodedToken.getEmail(), List.of(Role.USER)));
+
+                if (!appUserService.existsByUuid(decodedToken.getUid())) {
+                    appUserService.save(new AppUser(decodedToken.getUid(), decodedToken.getName(), decodedToken.getEmail(), List.of(Role.USER)));
                 }
 
                 // Set authenticated principal (we only need UID)
                 UsernamePasswordAuthenticationToken authentication =
-                        new UsernamePasswordAuthenticationToken(appUser, null, appUser.getAuthorities());
+                        new UsernamePasswordAuthenticationToken(decodedToken.getUid(), null, null);
 
                 SecurityContextHolder.getContext().setAuthentication(authentication);
 

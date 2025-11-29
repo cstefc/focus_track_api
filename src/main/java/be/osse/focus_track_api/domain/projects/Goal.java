@@ -3,7 +3,7 @@ package be.osse.focus_track_api.domain.projects;
 import be.osse.focus_track_api.domain.predefined.Priority;
 import jakarta.persistence.*;
 
-import java.sql.Timestamp;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -11,12 +11,12 @@ import java.util.Objects;
 public class Goal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @ManyToOne
     private Project project;
 
-    @OneToMany(mappedBy = "goal", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "goal", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Step> steps;
 
     @Column(nullable = false)
@@ -25,7 +25,7 @@ public class Goal {
 
     @Column(nullable = false)
     private Priority priority = Priority.Medium;
-    private Timestamp estimated;
+    private LocalTime estimated;
 
     public Goal(){}
 
@@ -73,11 +73,11 @@ public class Goal {
         this.priority = priority;
     }
 
-    public Timestamp getEstimated() {
+    public LocalTime getEstimated() {
         return estimated;
     }
 
-    public void setEstimated(Timestamp estimated) {
+    public void setEstimated(LocalTime estimated) {
         this.estimated = estimated;
     }
 

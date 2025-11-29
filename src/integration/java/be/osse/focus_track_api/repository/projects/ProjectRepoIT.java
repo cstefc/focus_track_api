@@ -2,7 +2,6 @@ package be.osse.focus_track_api.repository.projects;
 
 
 import be.osse.focus_track_api.domain.projects.Project;
-import be.osse.focus_track_api.repository.general.AppUserRepo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -17,9 +16,6 @@ class ProjectRepoIT {
 
     @Autowired
     private ProjectRepo repo;
-
-    @Autowired
-    private AppUserRepo appUserRepo;
 
     @Test
     void testFindByAppUserUuid() {

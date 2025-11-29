@@ -21,6 +21,10 @@ public class AppUserService {
         return (List<AppUser>) appUserRepo.findAll();
     }
 
+    public boolean existsByUuid(final String uuid) {
+        return appUserRepo.existsByUuid(uuid);
+    }
+
     public AppUser findByUuid(String uuid) {
         return appUserRepo.findByUuid(uuid);
     }

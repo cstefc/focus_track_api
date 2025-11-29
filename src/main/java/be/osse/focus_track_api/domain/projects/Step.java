@@ -11,9 +11,9 @@ public class Step {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Goal goal;
 
     private int sequence;
@@ -28,7 +28,7 @@ public class Step {
 
     private Timestamp completedAt = null;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -92,7 +92,7 @@ public class Step {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Step step = (Step) o;
-        return id == step.id && sequence == step.sequence && Objects.equals(goal, step.goal) && Objects.equals(objective, step.objective) && Objects.equals(description, step.description) && Objects.equals(requirements, step.requirements) && status == step.status && Objects.equals(completedAt, step.completedAt);
+        return Objects.equals(id, step.id) && sequence == step.sequence && Objects.equals(goal, step.goal) && Objects.equals(objective, step.objective) && Objects.equals(description, step.description) && Objects.equals(requirements, step.requirements) && status == step.status && Objects.equals(completedAt, step.completedAt);
     }
 
     @Override

@@ -1,50 +1,79 @@
 package be.osse.focus_track_api.controller.projects;
 
-import be.osse.focus_track_api.domain.general.AppUser;
-import be.osse.focus_track_api.domain.logging.Log;
-import be.osse.focus_track_api.domain.projects.Project;
 import be.osse.focus_track_api.dto.projects.CreateProjectDTO;
-import be.osse.focus_track_api.dto.projects.GetProjectDTO;
-import be.osse.focus_track_api.service.logging.LogService;
-import be.osse.focus_track_api.service.projects.ProjectMapper;
-import be.osse.focus_track_api.service.projects.ProjectService;
+import be.osse.focus_track_api.dto.projects.ProjectDTO;
+import be.osse.focus_track_api.dto.projects.UpdateProjectDTO;
+import be.osse.focus_track_api.service.projects.project.ProjectService;
+import be.osse.focus_track_api.service.projects.project.ProjectValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
 @RestController
 public class ProjectController {
     private final ProjectService projectService;
-    private final ProjectMapper projectMapper;
-    private final LogService logService;
+    private final ProjectValidator projectValidator;
 
     @Autowired
-    public ProjectController(final ProjectService projectService, final ProjectMapper projectMapper, LogService logService) {
+    public ProjectController(
+            final ProjectService projectService,
+            final ProjectValidator projectValidator
+    ) {
         this.projectService = projectService;
-        this.projectMapper = projectMapper;
-        this.logService = logService;
+        this.projectValidator = projectValidator;
     }
 
     @GetMapping("/projects")
-    public List<GetProjectDTO> getProjects(@AuthenticationPrincipal AppUser appUser) {
-        List<Project> projects = projectService.findAllByUser(appUser);
-        return projects.stream().map(projectMapper::toGetProjectDTO).toList();
+    public List<ProjectDTO> getProject(
+            @AuthenticationPrincipal String uuid,
+            @RequestParam(required = false) Long id
+    ) {
+        if (id == null) {
+            return projectService.findAllByUser(uuid);
+        }
+        if (projectValidator.validateProjectAccess(uuid, id)) {
+            return List.of(projectService.getById(id));
+        }
+        throw new ResponseStatusException(HttpStatus.FORBIDDEN);
     }
 
     @PostMapping("/projects")
-    public Project createProject(@AuthenticationPrincipal AppUser appUser, @RequestBody CreateProjectDTO projectData) {
-        Log log = new Log();
-        log.setArchived(false);
-        log = logService.save(log);
+    public ProjectDTO createProject(
+            @AuthenticationPrincipal String uuid,
+            @RequestBody CreateProjectDTO projectData
+    ) {
+        if (projectValidator.validateCreateData(projectData)) {
+            return projectService.create(uuid, projectData);
+        }
+        throw new ResponseStatusException(HttpStatus.FORBIDDEN);
+    }
 
-        final Project project = projectMapper.toProject(projectData, appUser, log);
+    @PutMapping("/projects")
+    public ProjectDTO updateProject(
+            @AuthenticationPrincipal String uuid,
+            @RequestBody UpdateProjectDTO data
+    ) {
+        if (projectValidator.validateUpdateData(uuid, data)) {
+            return projectService.update(data);
+        }
+        throw new ResponseStatusException(HttpStatus.FORBIDDEN);
+    }
 
-        return projectService.save(project);
+    @DeleteMapping("/projects/")
+    public void deleteProject(
+            @AuthenticationPrincipal String uuid,
+            @RequestParam long id
+    ) {
+        if (projectValidator.validateProjectAccess(uuid, id)
+        ) {
+            projectService.delete(id);
+        } else {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN);
+        }
     }
 
 }

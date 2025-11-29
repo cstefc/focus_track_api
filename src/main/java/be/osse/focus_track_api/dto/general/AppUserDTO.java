@@ -4,7 +4,7 @@ import be.osse.focus_track_api.domain.predefined.Role;
 
 import java.util.List;
 
-public record GetAppUserDTO (
+public record AppUserDTO(
         String uuid,
         String name,
         String email,

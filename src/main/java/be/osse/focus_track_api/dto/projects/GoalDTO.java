@@ -1,10 +1,14 @@
 package be.osse.focus_track_api.dto.projects;
 
-public record GetProjectDTO(
+import java.time.LocalTime;
+
+public record GoalDTO(
         long id,
 
         String title,
         String description,
 
-        boolean archived
-) {}
+        int priority,
+        LocalTime estimated
+) {
+}
