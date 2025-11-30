@@ -17,25 +17,25 @@ This API is part of a full-stack project. The corresponding front-end can be fou
 - **Authentication**: OAuth2/JWT using Firebase
 - **Front-end**: React [(link to repo)](https://github.com/cstefc/focus_track_ui)
 
-## Features (Work in Progress)
+## Features
 
 - **Environment Variables**: Sensitive information such as database credentials is stored in `.env` files.  
 - **OAuth2 Authentication** – Secure communication between front-end and back-end.  
 - **Endpoints**:
-     - `/projects`: GET, POST
-- **Mock Data**: Pre-generated data available for front-end development and testing purposes.  
+     - `/projects`: GET, POST, PUT, DELETE
+     - `/goals`: GET, POST, PUT, DELETE
+     - `/steps`: GET, POST, PUT, DELETE
+- **Mock Data**: Pre-generated data available for front-end development and testing purposes.
+- **Project Management** – Ability to create and manage projects.  
+- **Plans & Steps** – Add detailed goals with steps inside projects.  
 
-> ⚠️ Note: Additional endpoints for todos, goal tracking, and sports sessions are planned as the API continues development.
+
 ## Roadmap
 
 The project follows a **feature-driven development approach**, starting from the front-end and then integrating with the back-end. Planned features include:
-- **Project Management** – Ability to create and manage projects.  
-- **Plans & Steps** – Add detailed goals with steps inside projects.  
 - **Logging Feature** – Track progress and updates within projects.  
 - **Events** – Add and manage events related to goals and projects.
-
-> ⚠️ Note: These features are under development and will be gradually implemented.
-## Usage / Examples
+- **Dashboard** – Add endpoints to retrieve the statistics for the dashboard.
 
 ### Prerequisites
 - **PostgreSQL** database + appUser for the API
