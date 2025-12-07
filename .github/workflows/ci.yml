@@ -6,7 +6,7 @@ on:
 
 jobs:
   lint:
-    name: Lint (Checkstyle / PMD / Spotless)
+    name: Lint (Checkstyle / PMD)
     runs-on: ubuntu-latest
 
     steps:
