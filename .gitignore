@@ -34,4 +34,4 @@ build/
 
 ### Local Configuration (secrets) ###
 .env
-src/main/resources/private-key.json
+private-key.json
