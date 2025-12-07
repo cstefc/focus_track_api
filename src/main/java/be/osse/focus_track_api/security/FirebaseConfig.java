@@ -21,11 +21,16 @@ public class FirebaseConfig {
 
     @Bean
     public FirebaseApp firebaseApp() throws IOException {
+        // Prevent duplicate initialization
+        if (!FirebaseApp.getApps().isEmpty()) {
+            return FirebaseApp.getInstance();  // Return existing instance
+        }
+
         InputStream credentials = new ByteArrayInputStream(privateKey.getContentAsByteArray());
         FirebaseOptions firebaseOptions = FirebaseOptions.builder()
                 .setCredentials(GoogleCredentials.fromStream(credentials))
                 .build();
-        return FirebaseApp.initializeApp(firebaseOptions);
+        return FirebaseApp.initializeApp(firebaseOptions);  // Initialize only once
     }
 
     @Bean

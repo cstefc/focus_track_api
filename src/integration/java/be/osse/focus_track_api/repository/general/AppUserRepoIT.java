@@ -4,13 +4,15 @@ package be.osse.focus_track_api.repository.general;
 import be.osse.focus_track_api.domain.general.AppUser;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-@DataJpaTest
+@SpringBootTest
+@ActiveProfiles("it")
 class AppUserRepoIT {
 
     @Autowired
