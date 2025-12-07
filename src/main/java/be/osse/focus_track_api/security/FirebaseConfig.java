@@ -4,13 +4,11 @@ import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.auth.FirebaseAuth;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import org.springframework.core.io.Resource;
 
-import java.io.ByteArrayInputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -18,21 +16,19 @@ import java.io.InputStream;
 @Configuration
 public class FirebaseConfig {
 
-    @Value("classpath:/private-key.json")
-    private Resource privateKey;
-
     @Bean
     public FirebaseApp firebaseApp() throws IOException {
         // Prevent duplicate initialization
         if (!FirebaseApp.getApps().isEmpty()) {
             return FirebaseApp.getInstance();  // Return existing instance
         }
-
-        InputStream credentials = new ByteArrayInputStream(privateKey.getContentAsByteArray());
-        FirebaseOptions firebaseOptions = FirebaseOptions.builder()
-                .setCredentials(GoogleCredentials.fromStream(credentials))
-                .build();
-        return FirebaseApp.initializeApp(firebaseOptions);  // Initialize only once
+        String path = System.getenv("FIREBASE_KEY_PATH");
+        try (InputStream is = new FileInputStream(path)) {
+            FirebaseOptions options = FirebaseOptions.builder()
+                    .setCredentials(GoogleCredentials.fromStream(is))
+                    .build();
+            return FirebaseApp.initializeApp(options);
+        }
     }
 
     @Bean
