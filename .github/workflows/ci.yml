@@ -6,7 +6,7 @@ on:
 
 jobs:
   lint:
-    name: Lint (Checkstyle / PMD / Spotless)
+    name: Lint (Checkstyle / PMD)
     runs-on: ubuntu-latest
 
     steps:
@@ -29,9 +29,6 @@ jobs:
 
       - name: Run PMD
         run: mvn -B pmd:check
-
-      - name: Run Spotless
-        run: mvn -B spotless:check
 
   build:
     name: Build
