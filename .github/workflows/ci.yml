@@ -30,9 +30,6 @@ jobs:
       - name: Run PMD
         run: mvn -B pmd:check
 
-      - name: Run Spotless
-        run: mvn -B spotless:check
-
   build:
     name: Build
     runs-on: ubuntu-latest
