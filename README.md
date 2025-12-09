@@ -1,86 +1,117 @@
 # Focus Track API
 
-![status](https://img.shields.io/badge/status-WIP-yellow)
-![Java](https://img.shields.io/badge/Java-21-blue) 
-![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.5.6-brightgreen)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-17-blue)
-![OpenAPI](https://img.shields.io/badge/OpenAPI-3.0-orange)
+![status](https://img.shields.io/badge/status-active-brightgreen)
+![Java](https://img.shields.io/badge/Java-blue?logo=java\&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-brightgreen?logo=spring\&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-blue?logo=postgresql\&logoColor=white)
+![OpenAPI](https://img.shields.io/badge/OpenAPI-orange?logo=openapi\&logoColor=white)
 
-**Focus Track API** is a work-in-progress project designed as a portfolio piece to showcase my backend development skills. It allows me to deepen my knowledge of **Spring Boot** while building a practical application to help track personal goals.  
+**Focus Track API** is a backend service built with **Spring Boot** and **PostgreSQL**, designed to support the Focus Track frontend. It provides secure authentication, CRUD endpoints for projects, goals, and steps, and features for project management and goal tracking.
 
-This API is part of a full-stack project. The corresponding front-end can be found on my GitHub [here](https://github.com/cstefc/focus_track_ui). The goal is to create a seamless application for managing todos, logging progress, and tracking personal objectives.
+The frontend repository is available [here](https://github.com/cstefc/focus_track_ui).
+
+---
+
 ## Tech Stack
 
-- **Backend**: Spring Boot  
-- **Database**: PostgreSQL 17
-- **Language**: Java 21  
-- **Authentication**: OAuth2/JWT using Firebase
-- **Front-end**: React [(link to repo)](https://github.com/cstefc/focus_track_ui)
+* **Backend Framework:** Spring Boot
+* **Database:** PostgreSQL 17
+* **Language:** Java 21
+* **Authentication:** Firebase Authentication (OAuth2 / JWT)
+* **Front-end:** React [(link to repo)](https://github.com/cstefc/focus_track_ui)
+* **Documentation:** OpenAPI
+
+---
 
 ## Features
 
-- **Environment Variables**: Sensitive information such as database credentials is stored in `.env` files.  
-- **OAuth2 Authentication** – Secure communication between front-end and back-end.  
-- **Endpoints**:
-     - `/projects`: GET, POST, PUT, DELETE
-     - `/goals`: GET, POST, PUT, DELETE
-     - `/steps`: GET, POST, PUT, DELETE
-- **Mock Data**: Pre-generated data available for front-end development and testing purposes.
-- **Project Management** – Ability to create and manage projects.  
-- **Plans & Steps** – Add detailed goals with steps inside projects.  
+* **Authentication & Authorization:** Secure communication via Firebase JWT tokens. Endpoints are protected; tokens must be sent in requests using the `Authorization: Bearer <token>` header.
+* **CRUD Endpoints:**
 
+  * `/projects`: GET, POST, PUT, DELETE
+  * `/goals`: GET, POST, PUT, DELETE
+  * `/steps`: GET, POST, PUT, DELETE
+* **Development Mode:** Mock data available for front-end development and testing. Token verification can be bypassed using the Spring `dev` profile.
+* **Environment Variables:** Database credentials and other sensitive information stored in `.env` files.
+* **Unit & Integration Tests:** Basic setup provided for automated testing.
+
+---
 
 ## Roadmap
 
-The project follows a **feature-driven development approach**, starting from the front-end and then integrating with the back-end. Planned features include:
-- **Logging Feature** – Track progress and updates within projects.  
-- **Events** – Add and manage events related to goals and projects.
-- **Dashboard** – Add endpoints to retrieve the statistics for the dashboard.
+Planned features and improvements:
 
-### Prerequisites
-- **PostgreSQL** database + appUser for the API
-- **Firebase Project**
-- **Java 21** installed  
+* **Logging Feature:** Track progress and updates within projects.
+* **Events:** Manage events related to goals and projects.
+* **Dashboard Endpoints:** Provide statistics for dashboards.
 
-### Step 1: Create '.env' file
-Create a '.env' file in the project root (or set the environment variables locally). Default values:
+---
+
+## Prerequisites
+
+* PostgreSQL database + appUser for the API
+* Firebase project for authentication
+* Java 21 installed
+
+---
+
+## Setup Instructions
+
+### 1. Create `.env` file
+
+Create a `.env` file in the project root (or set environment variables locally) with the following defaults:
 
 ```
-DB_USER=postgres
-DB_PASS=postgres
-DB_IP=localhost
-DB_PORT=5432
-DB_NAME=focus_track
+DATABASE_HOST="db-hostname"
+DATABASE_PORT="db-port"
+DATABASE_NAME="db-name"
+DATABASE_USER="db-user"
+DATABASE_PASSWORD="something hard"
+FIREBASE_KEY_PATH="/path/to/private-key.json"
+SERVER_PORT="the port where the api should run"
 ```
 
-### Step 2: Download private key from Firebase console
-See [this tutorial](https://clemfournier.medium.com/how-to-get-my-firebase-service-account-key-file-f0ec97a21620)
-Put the private key in `src/main/resources/private-key.json`
+---
 
-### Step 3: Run the application
+### 2. Add Firebase Service Account
+
+Download the private key from your Firebase console:
+[Firebase Service Account Tutorial](https://clemfournier.medium.com/how-to-get-my-firebase-service-account-key-file-f0ec97a21620)
+
+Place the JSON file at the location specified in your environment variables.
+
+---
+
+### 3. Run the Application
 
 #### Linux / macOS
+
 ```
 ./mvnw spring-boot:run
 ```
 
 #### Windows
+
 ```
 mvnw.cmd spring-boot:run
 ```
 
-### Step 4: Check if the API is working
+---
 
-Once the server is running, go to `http://localhost:8080/public/docs` to see the documentation
-Please note that you can only access the endpoints when you have following header in the request:
-```
-Authorization: Bearer *JWT token from Firebase login*
-```
+### 4. Verify API
 
-### Development mode (WARNING: Do not use in production!)
-To enable the development modus to bypass the token verification, you need to update 'application.properties'.  
-At the end of the file you need to set the following settings to true:
-```
-development-mode=true
-spring.jpa.defer-datasource-initialization=true
-```
+Once running, visit:
+`http://localhost:8080/public/docs`
+
+> ⚠️ All protected endpoints require the header:
+> ```
+> Authorization: Bearer <JWT token from Firebase login>
+> ```
+
+---
+
+### 5. Development Mode (Optional)
+
+To bypass token verification and use mock data during development, use the Spring `dev` profile to load development settings.
+
+> ⚠️ Do not use development mode in production.
