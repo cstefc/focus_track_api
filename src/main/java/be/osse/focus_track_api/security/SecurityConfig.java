@@ -60,4 +60,19 @@ public class SecurityConfig {
 
         return http.build();
     }
+
+    @Bean
+    public CorsFilter corsFilter() {
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowCredentials(true);
+        config.addAllowedOrigin("https://focus.osse.be");
+        config.addAllowedOrigin("https://focusapi.osse.be");
+        config.addAllowedHeader("*");
+        config.addAllowedMethod("*"); // GET, POST, PUT, DELETE, OPTIONS, etc.
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", config);
+
+        return new CorsFilter(source);
+    }
 }
