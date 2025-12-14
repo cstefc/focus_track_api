@@ -3,6 +3,8 @@ package be.osse.focus_track_api.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
+import org.springframework.core.env.Profiles;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -20,10 +22,33 @@ import java.util.List;
 public class SecurityConfig {
 
     private final FirebaseTokenFilter firebaseTokenFilter;
+    private final Environment environment;
+
 
     @Autowired
-    public SecurityConfig(FirebaseTokenFilter firebaseTokenFilter) {
+    public SecurityConfig(FirebaseTokenFilter firebaseTokenFilter, Environment environment) {
         this.firebaseTokenFilter = firebaseTokenFilter;
+        this.environment = environment;
+    }
+
+
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+
+        if (environment.acceptsProfiles(Profiles.of("dev"))) {
+            configuration.setAllowedOrigins(List.of("https://focus.osse.be", "https://focusapi.osse.be", "http://localhost:5173"));
+        } else {
+            configuration.setAllowedOrigins(List.of("https://focus.osse.be", "https://focusapi.osse.be"));
+        }
+
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        configuration.setAllowedHeaders(List.of("*"));
+        configuration.setAllowCredentials(true);
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 
 
