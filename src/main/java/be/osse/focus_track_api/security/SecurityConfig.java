@@ -31,7 +31,6 @@ public class SecurityConfig {
         this.environment = environment;
     }
 
-
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
