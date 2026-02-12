@@ -1,7 +1,7 @@
 package be.osse.focus_track_api.service.projects.step;
 
-import be.osse.focus_track_api.dto.projects.CreateStepDTO;
-import be.osse.focus_track_api.dto.projects.UpdateStepDTO;
+import be.osse.focus_track_api.domain.projects.dto.CreateStepDTO;
+import be.osse.focus_track_api.domain.projects.dto.UpdateStepDTO;
 import be.osse.focus_track_api.service.projects.goal.GoalValidator;
 import org.springframework.stereotype.Service;
 

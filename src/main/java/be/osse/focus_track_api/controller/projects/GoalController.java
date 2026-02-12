@@ -1,8 +1,8 @@
 package be.osse.focus_track_api.controller.projects;
 
-import be.osse.focus_track_api.dto.projects.CreateGoalDTO;
-import be.osse.focus_track_api.dto.projects.GoalDTO;
-import be.osse.focus_track_api.dto.projects.UpdateGoalDTO;
+import be.osse.focus_track_api.domain.projects.dto.CreateGoalDTO;
+import be.osse.focus_track_api.domain.projects.dto.GoalDTO;
+import be.osse.focus_track_api.domain.projects.dto.UpdateGoalDTO;
 import be.osse.focus_track_api.service.projects.goal.GoalService;
 import be.osse.focus_track_api.service.projects.goal.GoalValidator;
 import be.osse.focus_track_api.service.projects.project.ProjectValidator;

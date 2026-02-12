@@ -2,8 +2,8 @@ package be.osse.focus_track_api.service.projects.project;
 
 import be.osse.focus_track_api.domain.general.AppUser;
 import be.osse.focus_track_api.domain.projects.Project;
-import be.osse.focus_track_api.dto.projects.CreateProjectDTO;
-import be.osse.focus_track_api.dto.projects.ProjectDTO;
+import be.osse.focus_track_api.domain.projects.dto.CreateProjectDTO;
+import be.osse.focus_track_api.domain.projects.dto.ProjectDTO;
 import org.springframework.stereotype.Service;
 
 @Service

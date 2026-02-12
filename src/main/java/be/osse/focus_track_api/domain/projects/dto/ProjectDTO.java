@@ -1,9 +1,10 @@
-package be.osse.focus_track_api.dto.projects;
+package be.osse.focus_track_api.domain.projects.dto;
 
-public record UpdateProjectDTO(
+public record ProjectDTO(
         long id,
 
         String title,
         String description,
+
         boolean archived
 ) {}

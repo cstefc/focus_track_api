@@ -2,9 +2,9 @@ package be.osse.focus_track_api.service.projects.project;
 
 import be.osse.focus_track_api.domain.general.AppUser;
 import be.osse.focus_track_api.domain.projects.Project;
-import be.osse.focus_track_api.dto.projects.CreateProjectDTO;
-import be.osse.focus_track_api.dto.projects.ProjectDTO;
-import be.osse.focus_track_api.dto.projects.UpdateProjectDTO;
+import be.osse.focus_track_api.domain.projects.dto.CreateProjectDTO;
+import be.osse.focus_track_api.domain.projects.dto.ProjectDTO;
+import be.osse.focus_track_api.domain.projects.dto.UpdateProjectDTO;
 import be.osse.focus_track_api.repository.projects.ProjectRepo;
 import be.osse.focus_track_api.service.general.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,10 +52,7 @@ public class ProjectService {
     }
 
     @Transactional
-    public ProjectDTO create(
-            final String uuid,
-            final CreateProjectDTO createProjectDTO
-    ) {
+    public ProjectDTO create(final String uuid, final CreateProjectDTO createProjectDTO) {
         final AppUser user = appUserService.findByUuid(uuid);
         final Project project = projectMapper.toProject(createProjectDTO, user);
         return projectMapper.toProjectDTO(projectRepo.save(project));

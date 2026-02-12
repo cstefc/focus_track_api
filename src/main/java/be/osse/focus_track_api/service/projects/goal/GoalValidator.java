@@ -1,7 +1,7 @@
 package be.osse.focus_track_api.service.projects.goal;
 
-import be.osse.focus_track_api.dto.projects.CreateGoalDTO;
-import be.osse.focus_track_api.dto.projects.UpdateGoalDTO;
+import be.osse.focus_track_api.domain.projects.dto.CreateGoalDTO;
+import be.osse.focus_track_api.domain.projects.dto.UpdateGoalDTO;
 import be.osse.focus_track_api.repository.projects.GoalRepo;
 import be.osse.focus_track_api.service.projects.project.ProjectValidator;
 import org.springframework.beans.factory.annotation.Autowired;

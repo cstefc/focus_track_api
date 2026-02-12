@@ -1,4 +1,4 @@
-package be.osse.focus_track_api.dto.general;
+package be.osse.focus_track_api.domain.general;
 
 import be.osse.focus_track_api.domain.predefined.Role;
 

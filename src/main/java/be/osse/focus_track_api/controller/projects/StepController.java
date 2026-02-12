@@ -1,8 +1,8 @@
 package be.osse.focus_track_api.controller.projects;
 
-import be.osse.focus_track_api.dto.projects.CreateStepDTO;
-import be.osse.focus_track_api.dto.projects.StepDTO;
-import be.osse.focus_track_api.dto.projects.UpdateStepDTO;
+import be.osse.focus_track_api.domain.projects.dto.CreateStepDTO;
+import be.osse.focus_track_api.domain.projects.dto.StepDTO;
+import be.osse.focus_track_api.domain.projects.dto.UpdateStepDTO;
 import be.osse.focus_track_api.service.projects.goal.GoalValidator;
 import be.osse.focus_track_api.service.projects.step.StepService;
 import be.osse.focus_track_api.service.projects.step.StepValidator;
