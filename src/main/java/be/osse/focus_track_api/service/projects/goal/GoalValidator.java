@@ -2,26 +2,23 @@ package be.osse.focus_track_api.service.projects.goal;
 
 import be.osse.focus_track_api.domain.projects.dto.CreateGoalDTO;
 import be.osse.focus_track_api.domain.projects.dto.UpdateGoalDTO;
-import be.osse.focus_track_api.repository.projects.GoalRepo;
 import be.osse.focus_track_api.service.projects.project.ProjectValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class GoalValidator {
-    private final GoalRepo goalRepo;
-    private final ProjectValidator projectValidator;
     private final GoalService goalService;
+    private final ProjectValidator projectValidator;
 
     @Autowired
-    public GoalValidator(final GoalRepo goalRepo, ProjectValidator projectValidator, GoalService goalService) {
-        this.goalRepo = goalRepo;
-        this.projectValidator = projectValidator;
+    public GoalValidator(GoalService goalService, ProjectValidator projectValidator) {
         this.goalService = goalService;
+        this.projectValidator = projectValidator;
     }
 
     private boolean isGoalId(long goalId) {
-        return goalRepo.existsById(goalId);
+        return goalService.exists(goalId);
     }
 
     public boolean validateCreateData(CreateGoalDTO data) {

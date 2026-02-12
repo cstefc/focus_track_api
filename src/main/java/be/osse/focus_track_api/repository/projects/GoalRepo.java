@@ -12,5 +12,5 @@ public interface GoalRepo extends CrudRepository<Goal, Long> {
     void deleteById(long id);
 
     @Query("SELECT p.id FROM Goal g JOIN g.project p WHERE g.id = :goalId")
-    int findProjectIdById(long goalId);
+    long findProjectIdById(long goalId);
 }

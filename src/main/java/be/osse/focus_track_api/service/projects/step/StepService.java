@@ -6,8 +6,8 @@ import be.osse.focus_track_api.domain.projects.Step;
 import be.osse.focus_track_api.domain.projects.dto.CreateStepDTO;
 import be.osse.focus_track_api.domain.projects.dto.StepDTO;
 import be.osse.focus_track_api.domain.projects.dto.UpdateStepDTO;
+import be.osse.focus_track_api.repository.projects.GoalRepo;
 import be.osse.focus_track_api.repository.projects.StepRepo;
-import be.osse.focus_track_api.service.projects.goal.GoalService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,12 +20,12 @@ import java.util.List;
 public class StepService {
     private final StepRepo stepRepo;
     private final StepMapper stepMapper;
-    private final GoalService goalService;
+    private final GoalRepo goalRepo;
 
-    public StepService(StepRepo stepRepo, StepMapper stepMapper, GoalService goalService) {
+    public StepService(StepRepo stepRepo, StepMapper stepMapper, GoalRepo goalRepo) {
         this.stepRepo = stepRepo;
         this.stepMapper = stepMapper;
-        this.goalService = goalService;
+        this.goalRepo = goalRepo;
     }
 
     @Transactional(readOnly = true)
@@ -56,7 +56,7 @@ public class StepService {
 
     @Transactional
     public StepDTO save(CreateStepDTO data) {
-        final Goal goal = goalService.getById(data.goalId());
+        final Goal goal = goalRepo.findById(data.goalId()).orElseThrow();
         final Step step = stepMapper.toStep(data, goal);
         return stepMapper.toStepDTO(stepRepo.save(step));
     }

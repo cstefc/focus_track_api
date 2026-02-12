@@ -32,12 +32,12 @@ public class GoalService {
     }
 
     @Transactional(readOnly = true)
-    public Goal getById(long goalId) {
-        return goalRepo.findById(goalId).orElse(null);
+    public boolean exists(long goalId){
+        return goalRepo.existsById(goalId);
     }
 
     @Transactional(readOnly = true)
-    public int getParentId(long goalId) {
+    public long getParentId(long goalId) {
         return goalRepo.findProjectIdById(goalId);
     }
 
