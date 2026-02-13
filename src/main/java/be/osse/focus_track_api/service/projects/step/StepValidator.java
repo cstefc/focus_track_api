@@ -20,7 +20,6 @@ public class StepValidator {
         return stepService.existsById(stepId);
     }
 
-
     private boolean isObjective(String objective) {
         return objective != null && !objective.isEmpty();
     }
@@ -31,7 +30,7 @@ public class StepValidator {
     }
 
     public boolean validateUpdateData(UpdateStepDTO data) {
-        return isStepId(data.id()) && stepService.existsByIdAndSequence(data.id(), data.sequence());
+        return isStepId(data.id()) && stepService.existsByIdAndSequence(data.id(), data.sequence()) && isObjective(data.objective());
     }
 
     public boolean validateStepAccess(String uuid, long stepId) {
