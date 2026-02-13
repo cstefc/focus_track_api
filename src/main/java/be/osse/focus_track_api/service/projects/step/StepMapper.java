@@ -3,8 +3,8 @@ package be.osse.focus_track_api.service.projects.step;
 import be.osse.focus_track_api.domain.predefined.Status;
 import be.osse.focus_track_api.domain.projects.Goal;
 import be.osse.focus_track_api.domain.projects.Step;
-import be.osse.focus_track_api.dto.projects.CreateStepDTO;
-import be.osse.focus_track_api.dto.projects.StepDTO;
+import be.osse.focus_track_api.domain.projects.dto.CreateStepDTO;
+import be.osse.focus_track_api.domain.projects.dto.StepDTO;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;

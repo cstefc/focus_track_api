@@ -1,7 +1,7 @@
 package be.osse.focus_track_api.service.projects.step;
 
-import be.osse.focus_track_api.dto.projects.CreateStepDTO;
-import be.osse.focus_track_api.dto.projects.UpdateStepDTO;
+import be.osse.focus_track_api.domain.projects.dto.CreateStepDTO;
+import be.osse.focus_track_api.domain.projects.dto.UpdateStepDTO;
 import be.osse.focus_track_api.service.projects.goal.GoalValidator;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +20,6 @@ public class StepValidator {
         return stepService.existsById(stepId);
     }
 
-
     private boolean isObjective(String objective) {
         return objective != null && !objective.isEmpty();
     }
@@ -31,7 +30,7 @@ public class StepValidator {
     }
 
     public boolean validateUpdateData(UpdateStepDTO data) {
-        return isStepId(data.id()) && stepService.existsByIdAndSequence(data.id(), data.sequence());
+        return isStepId(data.id()) && stepService.existsByIdAndSequence(data.id(), data.sequence()) && isObjective(data.objective());
     }
 
     public boolean validateStepAccess(String uuid, long stepId) {

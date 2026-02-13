@@ -1,7 +1,7 @@
 package be.osse.focus_track_api.service.projects.project;
 
-import be.osse.focus_track_api.dto.projects.CreateProjectDTO;
-import be.osse.focus_track_api.dto.projects.UpdateProjectDTO;
+import be.osse.focus_track_api.domain.projects.dto.CreateProjectDTO;
+import be.osse.focus_track_api.domain.projects.dto.UpdateProjectDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,10 +29,10 @@ public class ProjectValidator {
         return isTitle(createProjectDTO.title());
     }
 
-    public boolean validateUpdateData(String uuid, UpdateProjectDTO createProjectDTO) {
-        return isProjectId(createProjectDTO.id())
-                && validateProjectAccess(uuid, createProjectDTO.id())
-                && isTitle(createProjectDTO.title());
+    public boolean validateUpdateData(String uuid, UpdateProjectDTO updateProjectDTO) {
+        return isProjectId(updateProjectDTO.id())
+                && validateProjectAccess(uuid, updateProjectDTO.id())
+                && isTitle(updateProjectDTO.title());
     }
 
     public boolean validateProjectAccess(String uuid, long projectId) {

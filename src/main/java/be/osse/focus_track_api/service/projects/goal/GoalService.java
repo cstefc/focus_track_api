@@ -2,9 +2,9 @@ package be.osse.focus_track_api.service.projects.goal;
 
 import be.osse.focus_track_api.domain.projects.Goal;
 import be.osse.focus_track_api.domain.projects.Project;
-import be.osse.focus_track_api.dto.projects.CreateGoalDTO;
-import be.osse.focus_track_api.dto.projects.GoalDTO;
-import be.osse.focus_track_api.dto.projects.UpdateGoalDTO;
+import be.osse.focus_track_api.domain.projects.dto.CreateGoalDTO;
+import be.osse.focus_track_api.domain.projects.dto.GoalDTO;
+import be.osse.focus_track_api.domain.projects.dto.UpdateGoalDTO;
 import be.osse.focus_track_api.repository.projects.GoalRepo;
 import be.osse.focus_track_api.repository.projects.ProjectRepo;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ public class GoalService {
     private final GoalMapper goalMapper;
     private final ProjectRepo projectRepo;
 
-    public GoalService(GoalRepo goalRepo, GoalMapper goalMapper, ProjectRepo projectRepo) {
+    public GoalService(final GoalRepo goalRepo, final GoalMapper goalMapper, final ProjectRepo projectRepo) {
         this.goalRepo = goalRepo;
         this.goalMapper = goalMapper;
         this.projectRepo = projectRepo;
@@ -32,12 +32,12 @@ public class GoalService {
     }
 
     @Transactional(readOnly = true)
-    public Goal getById(long goalId) {
-        return goalRepo.findById(goalId).orElse(null);
+    public boolean exists(long goalId){
+        return goalRepo.existsById(goalId);
     }
 
     @Transactional(readOnly = true)
-    public int getParentId(long goalId) {
+    public long getParentId(long goalId) {
         return goalRepo.findProjectIdById(goalId);
     }
 

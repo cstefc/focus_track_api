@@ -1,7 +1,7 @@
 package be.osse.focus_track_api.controller.general;
 
 import be.osse.focus_track_api.domain.general.AppUser;
-import be.osse.focus_track_api.dto.general.AppUserDTO;
+import be.osse.focus_track_api.domain.general.AppUserDTO;
 import be.osse.focus_track_api.service.general.AppUserService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;

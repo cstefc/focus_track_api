@@ -57,7 +57,6 @@ public class FirebaseTokenFilter extends OncePerRequestFilter {
                 FirebaseToken decodedToken = FirebaseAuth.getInstance().verifyIdToken(idToken, true);
 
                 // Load user or create new one
-
                 if (!appUserService.existsByUuid(decodedToken.getUid())) {
                     appUserService.save(new AppUser(decodedToken.getUid(), decodedToken.getName(), decodedToken.getEmail(), List.of(Role.USER)));
                 }

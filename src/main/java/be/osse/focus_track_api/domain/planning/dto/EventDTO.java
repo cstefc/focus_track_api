@@ -1,4 +1,4 @@
-package be.osse.focus_track_api.dto.planning;
+package be.osse.focus_track_api.domain.planning.dto;
 
 import java.sql.Timestamp;
 

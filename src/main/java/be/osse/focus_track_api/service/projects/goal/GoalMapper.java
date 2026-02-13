@@ -2,8 +2,8 @@ package be.osse.focus_track_api.service.projects.goal;
 
 import be.osse.focus_track_api.domain.projects.Goal;
 import be.osse.focus_track_api.domain.projects.Project;
-import be.osse.focus_track_api.dto.projects.CreateGoalDTO;
-import be.osse.focus_track_api.dto.projects.GoalDTO;
+import be.osse.focus_track_api.domain.projects.dto.CreateGoalDTO;
+import be.osse.focus_track_api.domain.projects.dto.GoalDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

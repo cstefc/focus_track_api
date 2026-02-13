@@ -1,11 +1,9 @@
-package be.osse.focus_track_api.service.projects;
+package be.osse.focus_track_api.service.projects.project;
 
 import be.osse.focus_track_api.domain.general.AppUser;
-import be.osse.focus_track_api.domain.logging.Log;
 import be.osse.focus_track_api.domain.projects.Project;
-import be.osse.focus_track_api.dto.projects.CreateProjectDTO;
-import be.osse.focus_track_api.dto.projects.ProjectDTO;
-import be.osse.focus_track_api.service.projects.project.ProjectMapper;
+import be.osse.focus_track_api.domain.projects.dto.CreateProjectDTO;
+import be.osse.focus_track_api.domain.projects.dto.ProjectDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,12 +25,11 @@ public class ProjectMapperTest {
     @Test
     void testToProjectDTO() {
         // GIVEN
-        AppUser appUser = mock(AppUser.class);
         Project project = mock(Project.class);
 
         when(project.getId()).thenReturn(420L);
         when(project.getTitle()).thenReturn("Test Project");
-        when(project.getDescription()).thenReturn("Test Project");
+        when(project.getDescription()).thenReturn("Test Description");
         when(project.isArchived()).thenReturn(false);
 
         // WHEN

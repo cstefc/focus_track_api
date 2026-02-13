@@ -1,4 +1,4 @@
-package be.osse.focus_track_api.dto.logging;
+package be.osse.focus_track_api.domain.logging.dto;
 
 import be.osse.focus_track_api.domain.predefined.EntryType;
 

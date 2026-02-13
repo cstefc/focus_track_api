@@ -1,7 +1,7 @@
-package be.osse.focus_track_api.dto.projects;
+package be.osse.focus_track_api.domain.projects.dto;
 
-public record StepDTO(
-        Long id,
+public record CreateStepDTO(
+        long goalId,
         int sequence,
         String objective,
         String description,
