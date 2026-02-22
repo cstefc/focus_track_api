@@ -31,14 +31,6 @@ public class Project {
 
     public Project() {}
 
-    public Project(AppUser appUser, CreateProjectDTO createProjectDTO) {
-        this.appUser = appUser;
-        this.title = createProjectDTO.title();
-        this.description = createProjectDTO.description();
-        this.log = null;
-        this.goals = new ArrayList<>();
-        this.archived = false;
-    }
 
     public Long getId() {
         return id;

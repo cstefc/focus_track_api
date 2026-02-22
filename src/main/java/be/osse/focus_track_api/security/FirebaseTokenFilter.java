@@ -41,8 +41,7 @@ public class FirebaseTokenFilter extends OncePerRequestFilter {
 
         if (firebaseBypass) {
             if (!appUserService.existsByUuid("dev-001")) {
-                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                return;
+                appUserService.save(new AppUser("dev-001", "Dev User", "dev@email.ft", List.of(Role.USER)));
             }
 
             // Set authenticated principal (we only need UID)
