@@ -1,3 +1,4 @@
+
 package be.osse.focus_track_api.service.projects.goal;
 
 import be.osse.focus_track_api.domain.predefined.Priority;
@@ -9,8 +10,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import java.time.LocalTime;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -35,7 +34,7 @@ public class GoalValidatorTest {
     @Test
     public void testValidateCreateData_full(){
         // GIVEN
-        final CreateGoalDTO data = new CreateGoalDTO(1L, "title", "description", Priority.Low, LocalTime.of(1, 30));
+        final CreateGoalDTO data = new CreateGoalDTO(1L, "title", "description", Priority.Low, 540L);
 
         // WHEN
         final boolean result = goalValidator.validateCreateData(data);
@@ -47,7 +46,7 @@ public class GoalValidatorTest {
     @Test
     public void testValidateCreateData_no_title(){
         // GIVEN
-        final CreateGoalDTO data = new CreateGoalDTO(1L, "", "description", Priority.Low, LocalTime.of(1, 30));
+        final CreateGoalDTO data = new CreateGoalDTO(1L, "", "description", Priority.Low, 540L);
 
         // WHEN
         final boolean result = goalValidator.validateCreateData(data);
@@ -71,7 +70,7 @@ public class GoalValidatorTest {
     @Test
     public void testValidateUpdateData_valid_goalId(){
         // GIVEN
-        final UpdateGoalDTO data = new UpdateGoalDTO(1L, "title", "description", Priority.Low, LocalTime.of(1, 30));
+        final UpdateGoalDTO data = new UpdateGoalDTO(1L, "title", "description", Priority.Low, 540L);
         when(goalService.exists(1L)).thenReturn(true);
 
         // WHEN
@@ -84,7 +83,7 @@ public class GoalValidatorTest {
     @Test
     public void testValidateUpdateData_invalid_goalId(){
         // GIVEN
-        final UpdateGoalDTO data = new UpdateGoalDTO(1L, "title", "description", Priority.Low, LocalTime.of(1, 30));
+        final UpdateGoalDTO data = new UpdateGoalDTO(1L, "title", "description", Priority.Low, 540L);
         when(goalService.exists(1L)).thenReturn(false);
 
         // WHEN
@@ -97,7 +96,7 @@ public class GoalValidatorTest {
     @Test
     public void testValidateUpdateData_no_title(){
         // GIVEN
-        final UpdateGoalDTO data = new UpdateGoalDTO(1L, "", "description", Priority.Low, LocalTime.of(1, 30));
+        final UpdateGoalDTO data = new UpdateGoalDTO(1L, "", "description", Priority.Low, 540L);
         when(goalService.exists(1L)).thenReturn(true);
 
         // WHEN

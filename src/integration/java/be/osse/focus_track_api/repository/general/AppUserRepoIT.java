@@ -21,7 +21,7 @@ class AppUserRepoIT {
     @Test
     void testSave() {
         // GIVEN
-        AppUser user = new AppUser("test-uuid", "test", "test@email.com", List.of());
+        AppUser user = new AppUser("test-uuid", "test", "test@email.com");
         repo.save(user);
 
         // WHEN

@@ -35,7 +35,7 @@ public class GoalMapperTest {
         when(goal.getTitle()).thenReturn("goal title");
         when(goal.getDescription()).thenReturn("goal description");
         when(goal.getPriority()).thenReturn(Priority.Low);
-        when(goal.getEstimated()).thenReturn(LocalTime.of(1, 30));
+        when(goal.getEstimated()).thenReturn(540L);
 
         // WHEN
         final GoalDTO goalDTO = goalMapper.toGoalDTO(goal);
@@ -45,14 +45,14 @@ public class GoalMapperTest {
         assertEquals("goal title", goalDTO.title());
         assertEquals("goal description", goalDTO.description());
         assertEquals(Priority.Low.ordinal(), goalDTO.priority());
-        assertEquals(LocalTime.of(1, 30), goalDTO.estimated());
+        assertEquals(540L, goalDTO.estimated());
     }
 
     @Test
     public void testToGoal() {
         // GIVEN
         final Project project = mock(Project.class);
-        final CreateGoalDTO data = new CreateGoalDTO(1L, "title", "description", Priority.Low, LocalTime.of(1, 30));
+        final CreateGoalDTO data = new CreateGoalDTO(1L, "title", "description", Priority.Low, 540L);
 
         // WHEN
         final Goal result = goalMapper.toGoal(project, data);
@@ -62,6 +62,6 @@ public class GoalMapperTest {
         assertEquals("title", result.getTitle());
         assertEquals("description", result.getDescription());
         assertEquals(Priority.Low, result.getPriority());
-        assertEquals(LocalTime.of(1, 30), result.getEstimated());
+        assertEquals(540L, result.getEstimated());
     }
 }
