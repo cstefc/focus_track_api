@@ -2,7 +2,7 @@ package be.osse.focus_track_api.domain.projects.dto;
 
 import be.osse.focus_track_api.domain.predefined.Priority;
 
-import java.time.LocalTime;
+import java.time.Duration;
 
 public record CreateGoalDTO(
         long projectId,
@@ -11,6 +11,6 @@ public record CreateGoalDTO(
         String description,
 
         Priority priority,
-        LocalTime estimated
+        Long estimated
 ) {
 }

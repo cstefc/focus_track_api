@@ -1,17 +1,15 @@
 package be.osse.focus_track_api.domain.general;
 
-import be.osse.focus_track_api.domain.authorization.GrantedAuthorityFactory;
 import be.osse.focus_track_api.domain.planning.Event;
-import be.osse.focus_track_api.domain.predefined.Role;
 import be.osse.focus_track_api.domain.projects.Project;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name="app_user")
 public class AppUser implements UserDetails {
 
     @Id
@@ -30,15 +28,12 @@ public class AppUser implements UserDetails {
     @Column(nullable = false)
     private String email;
 
-    private List<Role> roles = new ArrayList<>();
-
     public AppUser() {}
 
-    public AppUser(String uuid, String name, String email, List<Role> roles) {
+    public AppUser(String uuid, String name, String email) {
         this.uuid = uuid;
         this.name = name;
         this.email = email;
-        this.roles = roles;
     }
 
     public String getUuid() {
@@ -61,14 +56,6 @@ public class AppUser implements UserDetails {
         this.email = email;
     }
 
-    public List<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
-    }
-
     public List<Project> getProjects() {
         return projects;
     }
@@ -79,7 +66,7 @@ public class AppUser implements UserDetails {
 
     @Override
     public List<GrantedAuthority> getAuthorities() {
-        return roles.stream().map(GrantedAuthorityFactory::createGrantedAuthority).toList();
+        return List.of();
     }
 
     @Override

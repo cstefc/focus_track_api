@@ -1,13 +1,16 @@
 package be.osse.focus_track_api.domain.projects;
 
 import be.osse.focus_track_api.domain.predefined.Priority;
+import com.google.type.Interval;
 import jakarta.persistence.*;
 
+import java.time.Duration;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Table(name="goal")
 public class Goal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,8 +27,10 @@ public class Goal {
     private String description;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.ORDINAL)
     private Priority priority = Priority.Medium;
-    private LocalTime estimated;
+
+    private Long estimated;
 
     public Goal(){}
 
@@ -73,11 +78,11 @@ public class Goal {
         this.priority = priority;
     }
 
-    public LocalTime getEstimated() {
+    public Long getEstimated() {
         return estimated;
     }
 
-    public void setEstimated(LocalTime estimated) {
+    public void setEstimated(Long estimated) {
         this.estimated = estimated;
     }
 

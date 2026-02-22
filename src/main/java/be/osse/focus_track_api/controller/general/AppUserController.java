@@ -21,7 +21,7 @@ public class AppUserController {
     @GetMapping("/user")
     public AppUserDTO getAppUsers(@AuthenticationPrincipal String uuid) {
         final AppUser appUser = appUserService.findByUuid(uuid);
-        return new AppUserDTO(appUser.getUuid(), appUser.getName(), appUser.getEmail(), List.of());
+        return new AppUserDTO(appUser.getUuid(), appUser.getName(), appUser.getEmail());
     }
 
 }

@@ -1,11 +1,15 @@
 package be.osse.focus_track_api.domain.logging;
 
+import be.osse.focus_track_api.domain.general.Reference;
 import be.osse.focus_track_api.domain.predefined.EntryType;
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
 
+import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
+@Table(name="entry")
 public class Entry {
 
     @Id
@@ -15,6 +19,10 @@ public class Entry {
     @ManyToOne
     private Log log;
 
+    @OneToOne
+    @JoinColumn(name = "reference_id")
+    private Reference reference = null;
+
     @Column(nullable = false)
     private String title;
 
@@ -23,8 +31,11 @@ public class Entry {
     @Column(nullable = false)
     private int scoring;
 
-    @Column(nullable = false)
+    @Enumerated(EnumType.ORDINAL)
     private EntryType entryType = EntryType.EVALUATION;
+
+    @CreationTimestamp
+    private Timestamp createdAt;
 
     public Long getId() {
         return id;
@@ -68,6 +79,14 @@ public class Entry {
 
     public void setEntryType(EntryType entryType) {
         this.entryType = entryType;
+    }
+
+    public Reference getReference() {
+        return reference;
+    }
+
+    public void setReference(Reference reference) {
+        this.reference = reference;
     }
 
     @Override

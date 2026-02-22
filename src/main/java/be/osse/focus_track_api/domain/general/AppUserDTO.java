@@ -7,7 +7,5 @@ import java.util.List;
 public record AppUserDTO(
         String uuid,
         String name,
-        String email,
-        List<Role> roles
-) {
+        String email) {
 }
