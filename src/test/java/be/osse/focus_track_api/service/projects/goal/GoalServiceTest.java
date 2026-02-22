@@ -116,7 +116,7 @@ public class GoalServiceTest {
         when(data.id()).thenReturn(1L);
         when(data.title()).thenReturn("title");
         when(data.description()).thenReturn("description");
-        when(data.priority()).thenReturn(Priority.Low);
+        when(data.priority()).thenReturn(Priority.LOW);
         when(data.estimated()).thenReturn(null);
 
         when(goalRepo.findById(1L)).thenReturn(Optional.of(goal));
@@ -129,7 +129,7 @@ public class GoalServiceTest {
         assertEquals(expected, result);
         verify(goal).setTitle("title");
         verify(goal).setDescription("description");
-        verify(goal).setPriority(Priority.Low);
+        verify(goal).setPriority(Priority.LOW);
         verify(goal).setEstimated(null);
     }
 

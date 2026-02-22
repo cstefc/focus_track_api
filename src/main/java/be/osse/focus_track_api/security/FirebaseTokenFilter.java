@@ -1,7 +1,6 @@
 package be.osse.focus_track_api.security;
 
 import be.osse.focus_track_api.domain.general.AppUser;
-import be.osse.focus_track_api.domain.predefined.Role;
 import be.osse.focus_track_api.service.general.AppUserService;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseToken;
@@ -18,7 +17,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-import java.util.List;
 
 @Component
 public class FirebaseTokenFilter extends OncePerRequestFilter {
@@ -41,8 +39,7 @@ public class FirebaseTokenFilter extends OncePerRequestFilter {
 
         if (firebaseBypass) {
             if (!appUserService.existsByUuid("dev-001")) {
-                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                return;
+                appUserService.save(new AppUser("dev-001", "Dev User", "dev@email.ft"));
             }
 
             // Set authenticated principal (we only need UID)
@@ -58,7 +55,7 @@ public class FirebaseTokenFilter extends OncePerRequestFilter {
 
                 // Load user or create new one
                 if (!appUserService.existsByUuid(decodedToken.getUid())) {
-                    appUserService.save(new AppUser(decodedToken.getUid(), decodedToken.getName(), decodedToken.getEmail(), List.of(Role.USER)));
+                    appUserService.save(new AppUser(decodedToken.getUid(), decodedToken.getName(), decodedToken.getEmail()));
                 }
 
                 // Set authenticated principal (we only need UID)

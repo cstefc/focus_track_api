@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
@@ -21,7 +19,7 @@ class AppUserRepoIT {
     @Test
     void testSave() {
         // GIVEN
-        AppUser user = new AppUser("test-uuid", "test", "test@email.com", List.of());
+        AppUser user = new AppUser("test-uuid", "test", "test@email.com");
         repo.save(user);
 
         // WHEN

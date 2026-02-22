@@ -1,7 +1,5 @@
 package be.osse.focus_track_api.domain.projects.dto;
 
-import java.time.LocalTime;
-
 public record GoalDTO(
         long id,
 
@@ -9,6 +7,6 @@ public record GoalDTO(
         String description,
 
         int priority,
-        LocalTime estimated
+        Long estimated
 ) {
 }

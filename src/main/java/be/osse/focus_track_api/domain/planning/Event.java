@@ -1,36 +1,36 @@
 package be.osse.focus_track_api.domain.planning;
 
 import be.osse.focus_track_api.domain.general.AppUser;
-import be.osse.focus_track_api.domain.logging.Log;
+import be.osse.focus_track_api.domain.general.Reference;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
+@Table(name="event")
 public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name="app_user_uuid")
     private AppUser appUser;
 
-    @OneToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Log log = new Log();
+    @ManyToOne
+    private Reference reference;
 
     @Column(nullable = false)
     private String title;
+
+    @Column
     private String description;
 
     @Column(nullable = false)
     private Timestamp start;
 
-    @Column(nullable = false)
-    private Timestamp plannedStop;
     private Timestamp stop;
-
-    private boolean timed;
 
     public Long getId() {
         return id;
@@ -68,14 +68,6 @@ public class Event {
         this.start = start;
     }
 
-    public Timestamp getPlannedStop() {
-        return plannedStop;
-    }
-
-    public void setPlannedStop(Timestamp plannedStop) {
-        this.plannedStop = plannedStop;
-    }
-
     public Timestamp getStop() {
         return stop;
     }
@@ -84,31 +76,23 @@ public class Event {
         this.stop = stop;
     }
 
-    public Log getLog() {
-        return log;
+    public Reference getReference() {
+        return reference;
     }
 
-    public void setLog(Log log) {
-        this.log = log;
-    }
-
-    public boolean isTimed() {
-        return timed;
-    }
-
-    public void setTimed(boolean timed) {
-        this.timed = timed;
+    public void setReference(Reference reference) {
+        this.reference = reference;
     }
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Event event = (Event) o;
-        return timed == event.timed && Objects.equals(id, event.id) && Objects.equals(appUser, event.appUser) && Objects.equals(title, event.title) && Objects.equals(description, event.description) && Objects.equals(start, event.start) && Objects.equals(plannedStop, event.plannedStop) && Objects.equals(stop, event.stop) && Objects.equals(log, event.log);
+        return Objects.equals(id, event.id) && Objects.equals(appUser, event.appUser) && Objects.equals(title, event.title) && Objects.equals(description, event.description) && Objects.equals(start, event.start) && Objects.equals(stop, event.stop);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, appUser, title, description, start, plannedStop, stop, log, timed);
+        return Objects.hash(id, appUser, title, description, start, stop);
     }
 }

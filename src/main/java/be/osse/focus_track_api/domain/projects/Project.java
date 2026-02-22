@@ -2,10 +2,8 @@ package be.osse.focus_track_api.domain.projects;
 
 import be.osse.focus_track_api.domain.general.AppUser;
 import be.osse.focus_track_api.domain.logging.Log;
-import be.osse.focus_track_api.domain.projects.dto.CreateProjectDTO;
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -16,12 +14,14 @@ public class Project {
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name="app_user_uuid")
     private AppUser appUser;
 
     @OneToMany(mappedBy = "project", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Goal> goals;
 
     @OneToOne(optional = false, orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name="log_id")
     private Log log = new Log();
 
     @Column(nullable = false)
@@ -31,14 +31,6 @@ public class Project {
 
     public Project() {}
 
-    public Project(AppUser appUser, CreateProjectDTO createProjectDTO) {
-        this.appUser = appUser;
-        this.title = createProjectDTO.title();
-        this.description = createProjectDTO.description();
-        this.log = null;
-        this.goals = new ArrayList<>();
-        this.archived = false;
-    }
 
     public Long getId() {
         return id;

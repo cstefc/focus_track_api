@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Table(name="log")
 public class Log {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -7,6 +7,7 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
+@Table(name="step")
 public class Step {
 
     @Id
@@ -14,8 +15,10 @@ public class Step {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="goal_id")
     private Goal goal;
 
+    @Column(nullable = false)
     private int sequence;
 
     @Column(nullable = false)
@@ -24,8 +27,10 @@ public class Step {
     private String requirements;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.ORDINAL)
     private Status status = Status.NotStarted;
 
+    @Column(name="completed_at")
     private Timestamp completedAt = null;
 
     public Long getId() {

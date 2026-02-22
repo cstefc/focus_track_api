@@ -7,8 +7,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RestController
 public class AppUserController {
 
@@ -21,7 +19,7 @@ public class AppUserController {
     @GetMapping("/user")
     public AppUserDTO getAppUsers(@AuthenticationPrincipal String uuid) {
         final AppUser appUser = appUserService.findByUuid(uuid);
-        return new AppUserDTO(appUser.getUuid(), appUser.getName(), appUser.getEmail(), List.of());
+        return new AppUserDTO(appUser.getUuid(), appUser.getName(), appUser.getEmail());
     }
 
 }
