@@ -1,11 +1,8 @@
 package be.osse.focus_track_api.domain.projects;
 
 import be.osse.focus_track_api.domain.predefined.Priority;
-import com.google.type.Interval;
 import jakarta.persistence.*;
 
-import java.time.Duration;
-import java.time.LocalTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -28,7 +25,7 @@ public class Goal {
 
     @Column(nullable = false)
     @Enumerated(EnumType.ORDINAL)
-    private Priority priority = Priority.Medium;
+    private Priority priority = Priority.LOW_MEDIUM;
 
     private Long estimated;
 

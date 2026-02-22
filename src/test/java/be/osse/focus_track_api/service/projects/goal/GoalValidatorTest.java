@@ -34,7 +34,7 @@ public class GoalValidatorTest {
     @Test
     public void testValidateCreateData_full(){
         // GIVEN
-        final CreateGoalDTO data = new CreateGoalDTO(1L, "title", "description", Priority.Low, 540L);
+        final CreateGoalDTO data = new CreateGoalDTO(1L, "title", "description", Priority.LOW, 540L);
 
         // WHEN
         final boolean result = goalValidator.validateCreateData(data);
@@ -46,7 +46,7 @@ public class GoalValidatorTest {
     @Test
     public void testValidateCreateData_no_title(){
         // GIVEN
-        final CreateGoalDTO data = new CreateGoalDTO(1L, "", "description", Priority.Low, 540L);
+        final CreateGoalDTO data = new CreateGoalDTO(1L, "", "description", Priority.LOW, 540L);
 
         // WHEN
         final boolean result = goalValidator.validateCreateData(data);
@@ -70,7 +70,7 @@ public class GoalValidatorTest {
     @Test
     public void testValidateUpdateData_valid_goalId(){
         // GIVEN
-        final UpdateGoalDTO data = new UpdateGoalDTO(1L, "title", "description", Priority.Low, 540L);
+        final UpdateGoalDTO data = new UpdateGoalDTO(1L, "title", "description", Priority.LOW, 540L);
         when(goalService.exists(1L)).thenReturn(true);
 
         // WHEN
@@ -83,7 +83,7 @@ public class GoalValidatorTest {
     @Test
     public void testValidateUpdateData_invalid_goalId(){
         // GIVEN
-        final UpdateGoalDTO data = new UpdateGoalDTO(1L, "title", "description", Priority.Low, 540L);
+        final UpdateGoalDTO data = new UpdateGoalDTO(1L, "title", "description", Priority.LOW, 540L);
         when(goalService.exists(1L)).thenReturn(false);
 
         // WHEN
@@ -96,7 +96,7 @@ public class GoalValidatorTest {
     @Test
     public void testValidateUpdateData_no_title(){
         // GIVEN
-        final UpdateGoalDTO data = new UpdateGoalDTO(1L, "", "description", Priority.Low, 540L);
+        final UpdateGoalDTO data = new UpdateGoalDTO(1L, "", "description", Priority.LOW, 540L);
         when(goalService.exists(1L)).thenReturn(true);
 
         // WHEN
